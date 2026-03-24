@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "module": "Node16",
+    "target": "ES2022",
+    "moduleResolution": "node16",
+    "outDir": "out/extension",
+    "rootDir": "src",
+    "lib": ["ES2022"],
+    "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/extension.ts",
+    "src/core/**/*",
+    "src/common/**/*",
+    "src/i18n/**/*.ts",
+    "src/i18n/**/*.json",
+    "src/fileCollector.ts"
+  ]
+}

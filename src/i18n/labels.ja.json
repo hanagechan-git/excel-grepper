@@ -1,0 +1,36 @@
+{
+  "search": {
+    "filePath": "フォルダパス",
+    "select": "選択",
+    "keyword": "キーワード",
+    "ignoreCase": "大文字小文字を無視",
+    "search": "検索",
+    "cancel": "キャンセル",
+    "csv": "CSV 出力"
+  },
+  "result": {
+    "noResult": "一致する結果はありませんでした。",
+    "truncatedNotice": "※ 2000件を超えたため、表示を一部省略しました。CSV出力して確認してください。",
+    "files": "件のファイル",
+    "hits": "件ヒット",
+    "target": "対象",
+    "filename": "ファイル名",
+    "sheet": "シート",
+    "cell": "セル",
+    "text": "テキスト",
+    "shape": "図形番号"
+  },
+  "alert": {
+    "keywordRequired": "キーワードを入力してください。",
+    "keywordTypeError": "検索キーワードの形式が正しくありません。",
+    "keywordLength": "検索キーワードは200文字以内で入力してください。",
+    "noResultsToExport": "出力する検索結果がありません。",
+    "folderInvalid": "フォルダが不正です。"
+  },
+  "dialog": {
+    "saveCsv": "CSV として保存"
+  },
+  "info": {
+    "csvSaved": "CSV を保存しました！"
+  }
+}

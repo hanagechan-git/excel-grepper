@@ -1,0 +1,70 @@
+{
+  "name": "excel-grepper",
+  "displayName": "Excel Grepper",
+  "description": "Search inside Excel (.xlsx/.xlsm) files using VS Code.",
+  "version": "0.1.0",
+  "publisher": "hanagechan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hanagechan-git/excel-grepper"
+  },
+  "engines": {
+    "vscode": "^1.110.0"
+  },
+  "keywords": [
+  "excel",
+  "xlsx",
+  "xlsm",
+  "spreadsheet",
+  "search",
+  "grep",
+  "excel search",
+  "xlsx search",
+  "excel grep",
+  "spreadsheet search",
+  "excel text search",
+  "excel content search",
+  "file search",
+  "recursive search"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:excelGrep.start"
+  ],
+  "main": "./out/extension/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "excelGrep.start",
+        "title": "Excel Grepper: Run"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -b && node esbuild.webview.js",
+    "watch": "tsc -b -w",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.110.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.27.4",
+    "eslint": "^9.39.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.48.1"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "vscode-nls": "^5.2.0",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^7.0.2"
+  }
+}

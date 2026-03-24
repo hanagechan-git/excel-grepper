@@ -1,0 +1,36 @@
+{
+  "search": {
+    "filePath": "Folder",
+    "select": "Select",
+    "keyword": "Keyword",
+    "ignoreCase": "Case-insensitive",
+    "search": "Search",
+    "cancel": "Cancel",
+    "csv": "Export CSV"
+  },
+  "result": {
+    "noResult": "No matching results were found.",
+    "truncatedNotice": "Results exceed 2000 items. Only the first 2000 are shown.Export as CSV to view all results.",
+    "files": "files",
+    "hits": "hits",
+    "target": "Target",
+    "filename": "Filename",
+    "sheet": "Sheet",
+    "cell": "Cell",
+    "text": "Text",
+    "shape": "Shape No."
+  },
+  "alert": {
+    "keywordRequired": "Please enter a keyword.",
+    "keywordTypeError": "The search keyword is invalid.",
+    "keywordLength": "The search keyword is too long (please keep it within 200 characters).",
+    "noResultsToExport": "There are no results to export.",
+    "folderInvalid": "Invalid folder path."
+  },
+  "dialog": {
+    "saveCsv": "Save as CSV"
+  },
+  "info": {
+    "csvSaved": "CSV has been saved."
+  }
+}

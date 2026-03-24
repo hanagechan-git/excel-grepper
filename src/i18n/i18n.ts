@@ -1,0 +1,15 @@
+// src/i18n/i18n.ts
+import * as vscode from "vscode";
+import labelsEn from "./labels.en.json";
+import labelsJa from "./labels.ja.json";
+import type { Labels } from "../common/labels";
+
+export function getLabels(): Labels {
+  const lang = vscode.env.language;
+
+  if (lang.startsWith("ja")) {
+    return labelsJa as Labels;
+  }
+
+  return labelsEn as Labels;
+}

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "target": "ES2022",
+    "moduleResolution": "bundler",
+    "outDir": "out/webview",
+    "rootDir": "src",
+    "lib": ["ES2022", "DOM"],
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/webview/**/*",
+    "src/common/**/*"
+  ]
+}

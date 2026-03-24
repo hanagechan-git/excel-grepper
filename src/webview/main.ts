@@ -1,0 +1,242 @@
+// src\webview\main.ts
+
+import { ToWebviewMessage } from "../common/message";
+import type { ExcelGrepResult } from "../common/types";
+import { renderResultTable } from "./components/resultTable";
+
+let isSearching = false;
+
+// WebView の window に labels を追加する
+declare global {
+  interface Window {
+    labels: any
+  }
+}
+
+// VS Code Webview API
+const vscode = acquireVsCodeApi();
+
+// Webview のルート要素
+const app = document.getElementById("app")!;
+
+window.addEventListener("load", () => {
+  setupSearchFormEvents();
+  vscode.postMessage({ type: "getDefaultFolder" });
+});
+
+
+// 初期化時に復元
+const state = vscode.getState();
+if (state) {
+  (document.getElementById("folderInput") as HTMLInputElement).value = state.folder ?? "";
+  (document.getElementById("keywordInput") as HTMLInputElement).value = state.keyword ?? "";
+  (document.getElementById("ignoreCaseInput") as HTMLInputElement).checked = state.ignoreCase ?? false;
+
+  if (state.results) {
+    renderGrepResult(state.results, state.fileCount, state.keyword, state.truncated, state.truncatedNotice);
+  }
+}
+
+// -----------------------------
+// 拡張機能 → Webview のメッセージ受信
+// -----------------------------
+window.addEventListener("message", (event) => {
+  const message = event.data as ToWebviewMessage;
+
+  switch (message.type) {
+    case "initLabels":
+      window.labels = message.labels;
+      const state = vscode.getState();
+      if (state?.results) {
+        renderGrepResult(state.results, state.fileCount, state.keyword, state.truncated, state.truncatedNotice);
+      }
+      break;
+
+    case "searchError":
+      // 検索失敗
+      isSearching = false;
+      setSearching(false);
+      break;
+
+    case "searchCancelled":
+      // 検索キャンセルした
+      isSearching = false;
+      setSearching(false);
+      break;
+
+    case "grepResult":
+      // 検索完了
+      isSearching = false;
+      setSearching(false);
+      renderGrepResult(message.payload, message.fileCount, message.keyword, message.truncated, message.truncatedNotice);
+      break;
+
+    case "folderSelected":
+      (document.getElementById("folderInput") as HTMLInputElement).value = message.folder;
+      break;
+
+    case "defaultFolder":
+      (document.getElementById("folderInput") as HTMLInputElement).value = message.folder;
+      break;
+
+  }
+});
+
+// -----------------------------
+// 検索フォーム
+// -----------------------------
+function setupSearchFormEvents() {
+
+  const folderInput = document.getElementById("folderInput") as HTMLInputElement;
+  const keywordInput = document.getElementById("keywordInput") as HTMLInputElement;
+  const ignoreCaseInput = document.getElementById("ignoreCaseInput") as HTMLInputElement;
+
+  // ファイル選択ダイアログ
+  document.getElementById("fileDialogBtn")!.addEventListener("click", () => {
+    vscode.postMessage({ type: "openFolderDialog" });
+  });
+
+  // 検索実行（ボタン）
+  document.getElementById("searchBtn")!.addEventListener("click", () => {
+    runSearch();
+  });
+
+  // Enter キーで検索実行
+  keywordInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      runSearch();
+    }
+  });
+
+  // cancel
+  document.getElementById("cancelBtn")!.addEventListener("click", () => {
+    vscode.postMessage({ type: "cancelSearch" });
+  });
+
+  // CSV出力
+  document.getElementById("csvBtn")!.addEventListener("click", () => {
+    vscode.postMessage({
+      type: "exportCsv",
+    });
+  });
+
+  // 検索処理を関数化（重複防止）
+  function runSearch() {
+
+    // 検索中なら無視
+    if (isSearching) {
+      return;
+    }
+
+    isSearching = true;
+    setSearching(true);
+
+    const folder = folderInput.value;
+    const keyword = keywordInput.value;
+    const ignoreCase = ignoreCaseInput.checked;
+
+    vscode.setState({ folder, keyword, ignoreCase });
+
+    vscode.postMessage({
+      type: "search",
+      payload: {
+        folder,
+        keyword,
+        ignoreCase
+      }
+    });
+  }
+
+}
+// -----------------------------
+// grep 結果の描画
+// -----------------------------
+function renderGrepResult(results: ExcelGrepResult[], fileCount: number, keyword: string, truncated:boolean, truncatedNotice: string) {
+
+  if (!window.labels) {
+    console.warn("Labels not loaded yet");
+    return;
+  }
+
+  const resultArea = document.getElementById("result-area")!;
+
+  vscode.setState({
+    ...vscode.getState(),
+    results,
+    fileCount,
+    truncated,
+    truncatedNotice
+  });
+
+  resultArea.innerHTML = "";
+
+  if (!results || results.length === 0) {
+    resultArea.innerHTML = `
+      <div class="no-result">
+        <h3>${window.labels.result.noResult}</h3>
+      </div>
+    `;
+    return;
+  }
+
+  // 表示上限オーバー
+  if (truncated) {
+    const notice = document.createElement("div");
+    notice.className = "truncate-notice";
+    notice.textContent = truncatedNotice;
+    resultArea.appendChild(notice);
+  }
+
+  // resultTable.ts を使って描画
+  // resultArea.innerHTML = renderResultTable(results, fileCount, keyword, window.labels);
+  const tableHtml = renderResultTable(results, fileCount, keyword, window.labels);
+  resultArea.insertAdjacentHTML("beforeend", tableHtml);
+
+  // ハイパーリンク
+  attachFileLinkEvents();
+
+}
+
+
+// 検索条件によるトグル
+function setSearching(isSearching: boolean) {
+
+  const searchBtn = document.getElementById("searchBtn") as HTMLButtonElement;
+  const cancelBtn = document.getElementById("cancelBtn") as HTMLButtonElement;
+  const csvBtn = document.getElementById("csvBtn") as HTMLButtonElement;
+
+  searchBtn.disabled = isSearching;
+  cancelBtn.disabled = !isSearching;
+  csvBtn.disabled = isSearching;
+
+  if (isSearching) {
+    searchBtn.classList.add("loading");
+    searchBtn.disabled = true;
+  } else {
+    searchBtn.classList.remove("loading");
+    searchBtn.disabled = false;
+  }
+}
+
+
+// -----------------------------
+// ファイル名クリック → Excel を開く
+// -----------------------------
+function attachFileLinkEvents() {
+  document.querySelectorAll(".file-link").forEach(el => {
+    el.addEventListener("click", () => {
+      const file = el.getAttribute("data-file");
+      const sheet = el.getAttribute("data-sheet");
+      const cell = el.getAttribute("data-cell");
+      vscode.postMessage({
+        type: "openFile",
+        file: file,
+        sheet: sheet,
+        cell: cell
+      });
+    });
+  });
+}
+
+
