@@ -5,7 +5,7 @@ Search inside Excel files (.xlsx / .xlsm) directly from VS Code.
 ---
 
 ## ✨ Features
-
+![Excel Grepper Demo](https://raw.githubusercontent.com/hanagechan-git/excel-grepper/main/images/demo.gif)
 * 🔍 Search text inside Excel files (cells & shapes)
 * 📁 Recursive search in folders
 * 🔡 Case-insensitive search option

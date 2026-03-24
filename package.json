@@ -3,7 +3,7 @@
   "displayName": "Excel Grepper",
   "description": "Search inside Excel (.xlsx/.xlsm) files using VS Code.",
   "version": "0.1.0",
-  "icon": "icon.png",
+  "icon": "images/icon.png",
   "publisher": "hanagechan",
   "license": "MIT",
   "repository": {
