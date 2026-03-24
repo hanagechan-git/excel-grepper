@@ -48,7 +48,7 @@
     "compile": "tsc -b && node esbuild.webview.js",
     "watch": "tsc -b -w",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src",
+    "lint": "eslint src"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
