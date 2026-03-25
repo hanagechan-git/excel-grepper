@@ -21,7 +21,7 @@ Search inside Excel files (.xlsx / .xlsm) directly from VS Code.
 1. Run command:
 
 ```
-Excel Grep: Run
+Excel Grepper: Run
 ```
 
 2. Enter:
