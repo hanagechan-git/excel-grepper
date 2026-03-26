@@ -2,7 +2,7 @@
   "name": "excel-grepper",
   "displayName": "Excel Grepper",
   "description": "Search inside Excel (.xlsx/.xlsm) files using VS Code.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "icon": "images/icon.png",
   "publisher": "hanagechan",
   "license": "MIT",
@@ -46,7 +46,7 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -b && node esbuild.webview.js",
+    "compile": "tsc -b && node esbuild.extension.js && node esbuild.webview.js",
     "watch": "tsc -b -w",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src"

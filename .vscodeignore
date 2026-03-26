@@ -1,9 +1,22 @@
-.vscode/**
-.vscode-test/**
-src/**
+# ソースコードは VSIX に不要
+src/
+**/*.ts
+**/*.map
+
+# node_modules はバンドル後は完全に不要
+node_modules/
+
+# 開発用設定ファイル
+tsconfig.json
+tsconfig.*.json
+.vscode/
+.vscode-test/
+.esbuild/
+esbuild.extension.js
+esbuild.webview.js
+**/*.tsbuildinfo
+
+# 開発環境専用ファイル
 .gitignore
 .yarnrc
-**/tsconfig.json
 **/eslint.config.mjs
-**/*.map
-src/**/*.ts
