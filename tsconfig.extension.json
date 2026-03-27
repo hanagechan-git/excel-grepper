@@ -4,6 +4,7 @@
     "module": "Node16",
     "target": "ES2022",
     "moduleResolution": "node16",
+    "noEmit": true,
     "outDir": "out/extension",
     "rootDir": "src",
     "lib": ["ES2022"],

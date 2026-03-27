@@ -2,7 +2,7 @@
   "name": "excel-grepper",
   "displayName": "Excel Grepper",
   "description": "Search inside Excel (.xlsx/.xlsm) files using VS Code.",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "icon": "images/icon.png",
   "publisher": "hanagechan",
   "license": "MIT",
@@ -35,7 +35,7 @@
   "activationEvents": [
     "onCommand:excelGrep.start"
   ],
-  "main": "./out/extension/extension.js",
+  "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {

@@ -2,6 +2,9 @@
 
 All notable changes to the "excel-grepper" extension will be documented in this file.
 
+## 1.1.0
+- Bug fix
+
 ## 1.0.2
 - Fully bundled extension to reduce VSIX size
 - Improved packaging structure using esbuild

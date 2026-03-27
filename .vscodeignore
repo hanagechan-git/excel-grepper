@@ -5,6 +5,7 @@ src/
 
 # node_modules はバンドル後は完全に不要
 node_modules/
+out/extension/
 
 # 開発用設定ファイル
 tsconfig.json
