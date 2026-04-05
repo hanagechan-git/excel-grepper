@@ -2,6 +2,11 @@
 
 All notable changes to the "excel-grepper" extension will be documented in this file.
 
+# 1.2.0
+- Improved behavior when switching tabs
+  Search status (searching / search results) is now correctly restored after switching tabs
+- Internal code cleanup for improved stability
+
 ## 1.1.0
 - Bug fix
 

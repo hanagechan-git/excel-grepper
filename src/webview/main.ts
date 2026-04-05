@@ -21,7 +21,8 @@ const app = document.getElementById("app")!;
 
 window.addEventListener("load", () => {
   setupSearchFormEvents();
-  vscode.postMessage({ type: "getDefaultFolder" });
+  setSearching(true);
+  vscode.postMessage({ type: "restoreState" });
 });
 
 
@@ -75,8 +76,23 @@ window.addEventListener("message", (event) => {
       (document.getElementById("folderInput") as HTMLInputElement).value = message.folder;
       break;
 
-    case "defaultFolder":
-      (document.getElementById("folderInput") as HTMLInputElement).value = message.folder;
+    case "restoreState":
+      const s = message.state;
+      (document.getElementById("folderInput") as HTMLInputElement).value = s.folder ?? "";
+      (document.getElementById("keywordInput") as HTMLInputElement).value = s.keyword ?? "";
+      (document.getElementById("ignoreCaseInput") as HTMLInputElement).checked = s.ignoreCase ?? false;
+
+      if (message.isSearching) {
+        isSearching = true;
+        setSearching(true);
+      } else {
+        isSearching = false;
+        setSearching(false);
+      }
+
+      if (s.results) {
+        renderGrepResult(s.results, s.fileCount, s.keyword ?? "", s.truncated, s.truncatedNotice ?? "");
+      }
       break;
 
   }
@@ -204,11 +220,22 @@ function setSearching(isSearching: boolean) {
 
   const searchBtn = document.getElementById("searchBtn") as HTMLButtonElement;
   const cancelBtn = document.getElementById("cancelBtn") as HTMLButtonElement;
+
+  const folderInput = document.getElementById("folderInput") as HTMLInputElement;
+  const keywordInput = document.getElementById("keywordInput") as HTMLInputElement;
+  const ignoreCaseInput = document.getElementById("ignoreCaseInput") as HTMLInputElement;
+  const fileDialogBtn = document.getElementById("fileDialogBtn") as HTMLButtonElement;
   const csvBtn = document.getElementById("csvBtn") as HTMLButtonElement;
 
   searchBtn.disabled = isSearching;
   cancelBtn.disabled = !isSearching;
+
+  folderInput.disabled = isSearching;
+  keywordInput.disabled = isSearching;
+  ignoreCaseInput.disabled = isSearching;
+  fileDialogBtn.disabled = isSearching;
   csvBtn.disabled = isSearching;
+
 
   if (isSearching) {
     searchBtn.classList.add("loading");

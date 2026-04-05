@@ -2,7 +2,7 @@
   "name": "excel-grepper",
   "displayName": "Excel Grepper",
   "description": "Search inside Excel (.xlsx/.xlsm) files using VS Code.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "icon": "images/icon.png",
   "publisher": "hanagechan",
   "license": "MIT",
@@ -14,20 +14,20 @@
     "vscode": "^1.110.0"
   },
   "keywords": [
-  "excel",
-  "xlsx",
-  "xlsm",
-  "spreadsheet",
-  "search",
-  "grep",
-  "excel search",
-  "xlsx search",
-  "excel grep",
-  "spreadsheet search",
-  "excel text search",
-  "excel content search",
-  "file search",
-  "recursive search"
+    "excel",
+    "xlsx",
+    "xlsm",
+    "spreadsheet",
+    "search",
+    "grep",
+    "excel search",
+    "xlsx search",
+    "excel grep",
+    "spreadsheet search",
+    "excel text search",
+    "excel content search",
+    "file search",
+    "recursive search"
   ],
   "categories": [
     "Other"

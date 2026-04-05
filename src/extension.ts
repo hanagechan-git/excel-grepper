@@ -17,9 +17,31 @@ import type { Labels } from "./common/labels";
 import { collectExcelFiles } from "./fileCollector";
 import { getLabels } from "./i18n/i18n";
 
+interface SearchState {
+  folder: string | null;
+  keyword: string | null;
+  ignoreCase: boolean;
+  results: ExcelGrepResult[] | null;
+  fileCount: number;
+  truncated: boolean;
+  truncatedNotice: string | null;
+}
+
+let lastState: SearchState = {
+  folder: null,
+  keyword: null,
+  ignoreCase: false,
+  results: null,
+  fileCount: 0,
+  truncated: false,
+  truncatedNotice: null
+};
+
+
 let cancelRequested = false;
 let panel: vscode.WebviewPanel | undefined;
 let results: ExcelGrepResult[] = [];
+let isSearching = false;
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -30,6 +52,8 @@ export function activate(context: vscode.ExtensionContext) {
       panel.reveal(vscode.ViewColumn.One);
       return;
     }
+
+    lastState.folder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? "";
 
     panel = vscode.window.createWebviewPanel(
       "excelGrep",
@@ -46,6 +70,16 @@ export function activate(context: vscode.ExtensionContext) {
     panel.onDidDispose(() => {
       panel = undefined;
       results = [];
+
+      lastState = {
+        folder: vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? "",
+        keyword: null,
+        ignoreCase: false,
+        results: null,
+        fileCount: 0,
+        truncated: false,
+        truncatedNotice: null
+      };
     });
 
     const labels = getLabels();
@@ -62,13 +96,14 @@ export function activate(context: vscode.ExtensionContext) {
     panel.webview.onDidReceiveMessage(async (msg: FromWebviewMessage) => {
       switch (msg.type) {
 
-        case "getDefaultFolder":
+        case "restoreState": {
           panel?.webview.postMessage({
-            type: "defaultFolder",
-            folder: vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? ""
-
+            type: "restoreState",
+            state: lastState,
+            isSearching: isSearching
           });
           break;
+        }
 
         case "search": {
           const { folder, keyword, ignoreCase } = msg.payload;
@@ -107,7 +142,11 @@ export function activate(context: vscode.ExtensionContext) {
           }
 
           cancelRequested = false;
+          isSearching = true;
           const safeKeyword = sanitizeKeyword(keyword);
+          lastState.folder = folder;
+          lastState.keyword = safeKeyword;
+          lastState.ignoreCase = ignoreCase;
 
           // 1. フォルダ内の Excel ファイルを再帰的に収集
           const files = await collectExcelFiles(folder);
@@ -150,6 +189,12 @@ export function activate(context: vscode.ExtensionContext) {
           const truncated = results.length > MAX_RESULTS;
           const displayResults = truncated ? results.slice(0, MAX_RESULTS) : results;
 
+          lastState.results = displayResults;
+          lastState.fileCount = files.length;
+          lastState.truncated = truncated;
+          lastState.truncatedNotice = labels.result.truncatedNotice;
+          isSearching = false
+
           // 3. Webview に返す
           panel?.webview.postMessage({
             type: "grepResult",
@@ -165,6 +210,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         case "cancelSearch": {
           cancelRequested = true;
+          isSearching = false;
           break;
         }
 

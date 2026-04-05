@@ -29,9 +29,18 @@ export type ToWebviewMessage =
       folder: string;
     }
   | {
-      type: "defaultFolder";
-      folder: string;
-    };
+      type: "restoreState";
+      state: {
+        folder: string | null;
+        keyword: string | null;
+        ignoreCase: boolean;
+        results: ExcelGrepResult[] | null;
+        fileCount: number;
+        truncated: boolean;
+        truncatedNotice: string | null;
+      };
+      isSearching: boolean;
+    }
 
 /**
  * Webview → 拡張機能
@@ -61,5 +70,5 @@ export type FromWebviewMessage =
       type: "exportCsv";
     }
   | {
-      type: "getDefaultFolder";
+      type: "restoreState";
     };
