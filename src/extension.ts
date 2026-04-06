@@ -387,14 +387,21 @@ export function validateFolderPath(folder: string): boolean {
     return false;
   }
 
-  // 存在チェック
-  if (!fs.existsSync(folder)) {
-    return false;
-  }
+  // ローカルの場合だけ存在チェック
+  if (!folder.startsWith("\\\\")) {
+    try {
+      // 存在チェック
+      if (!fs.existsSync(folder)) {
+        return false;
+      }
 
-  // フォルダであること
-  if (!fs.statSync(folder).isDirectory()) {
-    return false;
+      // フォルダであること
+      if (!fs.statSync(folder).isDirectory()) {
+        return false;
+      }
+    } catch {
+      return false;
+    }
   }
 
   return true;
