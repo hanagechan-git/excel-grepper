@@ -11,16 +11,23 @@ export type ToWebviewMessage =
       labels: Labels;
     }
   | {
+      type: "progress";
+      scanned: number;
+      total: number;
+      currentFile: string; 
+    }
+  | {
       type: "searchError";
     }
   | {
       type: "searchCancelled";
     }
   | {
-      type: "grepResult";
+      type: "searchComplete";
       payload: ExcelGrepResult[];
       fileCount: number;
       keyword: string;
+      unreadableMessage: string;
       truncated: boolean;
       truncatedNotice: string;
     }
@@ -36,6 +43,7 @@ export type ToWebviewMessage =
         ignoreCase: boolean;
         results: ExcelGrepResult[] | null;
         fileCount: number;
+        unreadableMessage: string | null;
         truncated: boolean;
         truncatedNotice: string | null;
       };

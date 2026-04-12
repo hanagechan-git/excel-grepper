@@ -10,7 +10,8 @@
   },
   "result": {
     "noResult": "No matching results were found.",
-    "truncatedNotice": "Results exceed 2000 items. Only the first 2000 are shown.Export as CSV to view all results.",
+    "truncatedNotice": "⚠️ Results exceed 2000 items. Only the first 2000 are shown.Export as CSV to view all results.",
+    "unreadableFilesHeader": "⚠️ Some Excel files with unusually large internal structures were excluded from the search.:",
     "files": "files",
     "hits": "hits",
     "target": "Target",

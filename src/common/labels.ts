@@ -14,6 +14,7 @@ export interface Labels {
   result: {
     noResult: string;
     truncatedNotice: string;
+    unreadableFilesHeader: string;
     files: string;
     hits: string;
     target: string;

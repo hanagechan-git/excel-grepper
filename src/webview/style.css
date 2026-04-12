@@ -33,7 +33,7 @@ body {
   border-radius: 6px;
   max-width: 700px;
   width: 100%;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 8px auto;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   z-index: 10;
 }
@@ -173,6 +173,26 @@ button:disabled {
   to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
+/* 件数表示 */
+.status-area {
+  padding: 4px 12px;
+  background: var(--vscode-editorWidget-background);
+  border-bottom: 1px solid var(--vscode-input-border);
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: pre-line; /* 2行表示 */
+}
+
+/* 警告メッセージ */
+.warning {
+  padding: 4px 12px;
+  background: #ffecec;
+  border: 1px solid #ffb3b3;
+  color: #a33;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  white-space: pre-line;
+}
 
 /* 結果エリア */
 #result-area {
@@ -181,6 +201,11 @@ button:disabled {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  background: var(--vscode-editor-background);
+}
+
+.result-header {
+  flex-shrink: 0;
 }
 
 /* 結果なし */
@@ -200,22 +225,9 @@ button:disabled {
   border-radius: 4px;
 }
 
-/* 件数表示 */
-.result-header {
-  position: sticky;
-  top: 0;
-  background: var(--vscode-editorWidget-background);
-  z-index: 5;
-  padding: 8px;
-  font-weight: bold;
-  border-bottom: 1px solid var(--vscode-input-border);
-  flex-shrink: 0;
-  overflow: hidden;
-}
-
 /* 結果テーブル */
 .table-container {
-  max-height: 70vh;
+  max-height: 65vh;
   flex: 1;
   overflow-y: auto;
   border: 1px solid var(--vscode-input-border);

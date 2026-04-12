@@ -30,10 +30,6 @@ export function renderResultTable(results: ExcelGrepResult[], fileCount: number,
     .join("");
 
   return `
-    <div class="result-header">
-      ${fileCount} ${labels.result.files} / ${results.length} ${labels.result.hits}
-    </div>
-
     <div class="table-container">
       <table class="grep-table">
         <thead>

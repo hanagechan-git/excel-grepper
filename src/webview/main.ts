@@ -34,7 +34,7 @@ if (state) {
   (document.getElementById("ignoreCaseInput") as HTMLInputElement).checked = state.ignoreCase ?? false;
 
   if (state.results) {
-    renderGrepResult(state.results, state.fileCount, state.keyword, state.truncated, state.truncatedNotice);
+    renderGrepResult(state.results, state.fileCount, state.keyword, state.unreadableMessage, state.truncated, state.truncatedNotice);
   }
 }
 
@@ -49,8 +49,14 @@ window.addEventListener("message", (event) => {
       window.labels = message.labels;
       const state = vscode.getState();
       if (state?.results) {
-        renderGrepResult(state.results, state.fileCount, state.keyword, state.truncated, state.truncatedNotice);
+        renderGrepResult(state.results, state.fileCount, state.keyword, state.unreadableMessage, state.truncated, state.truncatedNotice);
       }
+      break;
+
+    case "progress":
+      (document.getElementById("status-area") as HTMLElement).textContent =
+        `${message.scanned} / ${message.total} files scanned\n` +
+        `Current File: ${message.currentFile}`;
       break;
 
     case "searchError":
@@ -65,11 +71,11 @@ window.addEventListener("message", (event) => {
       setSearching(false);
       break;
 
-    case "grepResult":
+    case "searchComplete":
       // 検索完了
       isSearching = false;
       setSearching(false);
-      renderGrepResult(message.payload, message.fileCount, message.keyword, message.truncated, message.truncatedNotice);
+      renderGrepResult(message.payload, message.fileCount, message.keyword, message.unreadableMessage, message.truncated, message.truncatedNotice);
       break;
 
     case "folderSelected":
@@ -91,7 +97,7 @@ window.addEventListener("message", (event) => {
       }
 
       if (s.results) {
-        renderGrepResult(s.results, s.fileCount, s.keyword ?? "", s.truncated, s.truncatedNotice ?? "");
+        renderGrepResult(s.results, s.fileCount, s.keyword ?? "", s.unreadableMessage ?? "", s.truncated, s.truncatedNotice ?? "");
       }
       break;
 
@@ -168,7 +174,13 @@ function setupSearchFormEvents() {
 // -----------------------------
 // grep 結果の描画
 // -----------------------------
-function renderGrepResult(results: ExcelGrepResult[], fileCount: number, keyword: string, truncated:boolean, truncatedNotice: string) {
+function renderGrepResult(
+  results: ExcelGrepResult[],
+  fileCount: number,
+  keyword: string,
+  unreadableMessage: string,
+  truncated:boolean,
+  truncatedNotice: string) {
 
   if (!window.labels) {
     console.warn("Labels not loaded yet");
@@ -196,16 +208,42 @@ function renderGrepResult(results: ExcelGrepResult[], fileCount: number, keyword
     return;
   }
 
-  // 表示上限オーバー
+  // // 読めなかったファイル一覧
+  // if (unreadableMessage) {
+  //   const warn = document.createElement("div");
+  //   warn.className = "warning";
+  //   warn.textContent = unreadableMessage;
+  //   resultArea.appendChild(warn);
+  // }
+
+  // // 表示上限オーバー
+  // if (truncated) {
+  //   const notice = document.createElement("div");
+  //   notice.className = "truncate-notice";
+  //   notice.textContent = truncatedNotice;
+  //   resultArea.appendChild(notice);
+  // }
+
+  const header = document.createElement("div");
+  header.className = "result-header";
+
+  if (unreadableMessage) {
+    const warn = document.createElement("div");
+    warn.className = "warning";
+    warn.textContent = unreadableMessage;
+    header.appendChild(warn);
+  }
+
   if (truncated) {
     const notice = document.createElement("div");
     notice.className = "truncate-notice";
     notice.textContent = truncatedNotice;
-    resultArea.appendChild(notice);
+    header.appendChild(notice);
   }
 
+  resultArea.appendChild(header);
+
   // resultTable.ts を使って描画
-  // resultArea.innerHTML = renderResultTable(results, fileCount, keyword, window.labels);
   const tableHtml = renderResultTable(results, fileCount, keyword, window.labels);
   resultArea.insertAdjacentHTML("beforeend", tableHtml);
 

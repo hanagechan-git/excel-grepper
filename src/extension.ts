@@ -23,6 +23,7 @@ interface SearchState {
   ignoreCase: boolean;
   results: ExcelGrepResult[] | null;
   fileCount: number;
+  unreadableMessage: string | null;
   truncated: boolean;
   truncatedNotice: string | null;
 }
@@ -33,6 +34,7 @@ let lastState: SearchState = {
   ignoreCase: false,
   results: null,
   fileCount: 0,
+  unreadableMessage: null,
   truncated: false,
   truncatedNotice: null
 };
@@ -77,6 +79,7 @@ export function activate(context: vscode.ExtensionContext) {
         ignoreCase: false,
         results: null,
         fileCount: 0,
+        unreadableMessage: null,
         truncated: false,
         truncatedNotice: null
       };
@@ -151,7 +154,16 @@ export function activate(context: vscode.ExtensionContext) {
           // 1. フォルダ内の Excel ファイルを再帰的に収集
           const files = await collectExcelFiles(folder);
 
+          panel?.webview.postMessage({
+            type: "progress",
+            scanned: 0,
+            total: files.length,
+            currentFile: ""
+          });
+
           results = [];
+          let scanned = 0;
+          const unreadableFiles: string[] = [];
 
           // 2. 各ファイルを検索
           for (const file of files) {
@@ -169,6 +181,14 @@ export function activate(context: vscode.ExtensionContext) {
               const relsMap = await parseWorkbookRels(zip);
               const sheetMap = await parseWorkbook(zip, relsMap);
 
+              const relativePath = path.relative(folder, file).replace(/\//g, "\\");
+              panel?.webview.postMessage({
+                type: "progress",
+                scanned,
+                total: files.length,
+                currentFile: relativePath
+              });
+
               const fileResults = await grepExcelFile(
                 file,
                 zip,
@@ -176,12 +196,30 @@ export function activate(context: vscode.ExtensionContext) {
                 safeKeyword,
                 ignoreCase
               );
+              scanned++;
 
               results.push(...fileResults);
             } catch (err) {
               console.error(`Error reading ${file}:`, err);
-              // 読めないファイルはスキップ（~$ など）
+              // 読めないファイルを相対パスで保存
+              unreadableFiles.push(path.relative(folder, file).replace(/\//g, "\\"));
+              continue;
             }
+          }
+
+          // 最終進捗
+          panel?.webview.postMessage({
+            type: "progress",
+            scanned,
+            total: files.length,
+            currentFile: ""
+          });
+
+          let unreadableMessage = "";
+          if (unreadableFiles.length > 0) {
+            unreadableMessage =
+              labels.result.unreadableFilesHeader + "\n" +
+              unreadableFiles.map(f => `- ${f}`).join("\n");
           }
 
           const MAX_RESULTS = 2000;
@@ -193,14 +231,16 @@ export function activate(context: vscode.ExtensionContext) {
           lastState.fileCount = files.length;
           lastState.truncated = truncated;
           lastState.truncatedNotice = labels.result.truncatedNotice;
-          isSearching = false
+          lastState.unreadableMessage = unreadableMessage;
+          isSearching = false;
 
           // 3. Webview に返す
           panel?.webview.postMessage({
-            type: "grepResult",
+            type: "searchComplete",
             payload: displayResults,
             fileCount: files.length,
             keyword: keyword,
+            unreadableMessage : unreadableMessage,
             truncated: truncated,
             truncatedNotice: labels.result.truncatedNotice
           });
@@ -325,7 +365,7 @@ function getWebviewContent(
           </div>
         </div>
       </div>
-
+      <div id="status-area" class="status-area"></div>
       <div id="result-area"></div>
 
       <script nonce="${nonce}">
