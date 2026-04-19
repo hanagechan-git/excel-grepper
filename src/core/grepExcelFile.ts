@@ -4,6 +4,7 @@ import JSZip from "jszip";
 import { grepExcelCells ,CellGrepResult } from "./cells/grepExcelCells";
 import { grepExcelShapes, ShapeGrepResult } from "./shapes/grepExcelShapes";
 import { ExcelGrepResult } from "../common/types";
+import { DateMask } from "../common/dateTypes";
 
 /**
  * Excel ファイル 1 つに対して、
@@ -16,7 +17,8 @@ export async function grepExcelFile(
   zip: JSZip,
   sheetMap: Record<number, string>,   // Cells 用の既存構造
   keyword: string,
-  ignoreCase: boolean
+  ignoreCase: boolean,
+  dateMask: DateMask | null
 ): Promise<ExcelGrepResult[]> {
 
   // -----------------------------
@@ -27,7 +29,8 @@ export async function grepExcelFile(
     zip,
     sheetMap,
     keyword,
-    ignoreCase
+    ignoreCase,
+    dateMask
   );
   const cellResults: ExcelGrepResult[] = cellResultsRaw.map(convertCellResult);
 

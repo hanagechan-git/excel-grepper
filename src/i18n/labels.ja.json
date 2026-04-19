@@ -4,6 +4,7 @@
     "select": "選択",
     "keyword": "キーワード",
     "ignoreCase": "大文字小文字を無視",
+    "dateSearch": "日付型セル検索 (YYYYMMDD with * wildcard)",
     "search": "検索",
     "cancel": "キャンセル",
     "csv": "CSV 出力"
@@ -22,11 +23,25 @@
     "shape": "図形番号"
   },
   "alert": {
-    "keywordRequired": "キーワードを入力してください。",
-    "keywordTypeError": "検索キーワードの形式が正しくありません。",
-    "keywordLength": "検索キーワードは200文字以内で入力してください。",
-    "noResultsToExport": "出力する検索結果がありません。",
-    "folderInvalid": "フォルダが不正です。"
+    "keywordRequired": "キーワードを入力してください。😐",
+    "keywordTypeError": "検索キーワードの形式が正しくありません。😵",
+    "keywordLength": "検索キーワードは200文字以内で入力してください。😵",
+    "noResultsToExport": "出力する検索結果がありません。📄",
+    "folderRequired": "フォルダパスを入力してください。😐",
+    "folderRelativeNotAllowed": "相対パスは使用できません。😱",
+    "folderMustBeAbsolute": "絶対パスを指定してください。😱",
+    "folderNotFound": "指定されたフォルダが見つかりません。😱",
+    "folderNotDirectory": "指定されたパスはフォルダではありません。😱",
+    "folderNotAccessible": "フォルダにアクセスできません。😱",
+    "dateMaskInvalid": "日付検索の入力が正しくありません。😵",
+    "InvalidLengthError": "日付検索の入力は8桁で指定してください。😵",
+    "InvalidCharacterError": "日付検索には数字または * のみ使用できます。😵",
+    "AllAsterisksError": "******** のような全てワイルドカードは指定できません。😵",
+    "InvalidWildcardPatternError": "日付のワイルドカード指定が正しくありません。😵",
+    "InvalidMonthError": "月の指定が正しくありません。😵",
+    "InvalidDayError": "日の指定が正しくありません。😵",
+    "InvalidMonthDayError": "月と日の組み合わせが正しくありません。🤯",
+    "InvalidLeapDayError": "うるう年ではないため、2月29日は指定できません。🤯"
   },
   "dialog": {
     "saveCsv": "CSV として保存"

@@ -6,6 +6,7 @@ export interface Labels {
     select: string;
     keyword: string;
     ignoreCase: string;
+    dateSearch: string;
     search: string;
     cancel: string;
     csv: string;
@@ -30,7 +31,21 @@ export interface Labels {
     keywordTypeError: string;
     keywordLength: string;
     noResultsToExport: string;
-    folderInvalid: string;
+    folderRequired: string;
+    folderRelativeNotAllowed: string;
+    folderMustBeAbsolute: string;
+    folderNotFound: string;
+    folderNotDirectory: string;
+    folderNotAccessible: string;
+    dateMaskInvalid: string;
+    InvalidLengthError: string;
+    InvalidCharacterError: string;
+    AllAsterisksError: string;
+    InvalidWildcardPatternError: string;
+    InvalidMonthError: string;
+    InvalidDayError: string;
+    InvalidMonthDayError: string;
+    InvalidLeapDayError: string;
   };
 
   dialog: {

@@ -41,6 +41,7 @@ export type ToWebviewMessage =
         folder: string | null;
         keyword: string | null;
         ignoreCase: boolean;
+        dateSearchEnabled: boolean;
         results: ExcelGrepResult[] | null;
         fileCount: number;
         unreadableMessage: string | null;
@@ -60,6 +61,7 @@ export type FromWebviewMessage =
         folder: string;
         keyword: string;
         ignoreCase: boolean;
+        dateSearchEnabled: boolean;
       };
     }
   | {
@@ -73,6 +75,7 @@ export type FromWebviewMessage =
     }
   | {
       type: "openFolderDialog";
+      currentFolder: string;
     }
   | {
       type: "exportCsv";

@@ -87,6 +87,7 @@ window.addEventListener("message", (event) => {
       (document.getElementById("folderInput") as HTMLInputElement).value = s.folder ?? "";
       (document.getElementById("keywordInput") as HTMLInputElement).value = s.keyword ?? "";
       (document.getElementById("ignoreCaseInput") as HTMLInputElement).checked = s.ignoreCase ?? false;
+      (document.getElementById("dateSearchInput") as HTMLInputElement).checked = s.dateSearchEnabled ?? false;
 
       if (message.isSearching) {
         isSearching = true;
@@ -112,10 +113,11 @@ function setupSearchFormEvents() {
   const folderInput = document.getElementById("folderInput") as HTMLInputElement;
   const keywordInput = document.getElementById("keywordInput") as HTMLInputElement;
   const ignoreCaseInput = document.getElementById("ignoreCaseInput") as HTMLInputElement;
+  const dateSearchInput = document.getElementById("dateSearchInput") as HTMLInputElement;
 
   // ファイル選択ダイアログ
   document.getElementById("fileDialogBtn")!.addEventListener("click", () => {
-    vscode.postMessage({ type: "openFolderDialog" });
+    vscode.postMessage({ type: "openFolderDialog", currentFolder: folderInput.value });
   });
 
   // 検索実行（ボタン）
@@ -157,15 +159,17 @@ function setupSearchFormEvents() {
     const folder = folderInput.value;
     const keyword = keywordInput.value;
     const ignoreCase = ignoreCaseInput.checked;
+    const dateSearchEnabled = dateSearchInput.checked;
 
-    vscode.setState({ folder, keyword, ignoreCase });
+    vscode.setState({ folder, keyword, ignoreCase, dateSearchEnabled });
 
     vscode.postMessage({
       type: "search",
       payload: {
         folder,
         keyword,
-        ignoreCase
+        ignoreCase,
+        dateSearchEnabled
       }
     });
   }
@@ -208,22 +212,6 @@ function renderGrepResult(
     return;
   }
 
-  // // 読めなかったファイル一覧
-  // if (unreadableMessage) {
-  //   const warn = document.createElement("div");
-  //   warn.className = "warning";
-  //   warn.textContent = unreadableMessage;
-  //   resultArea.appendChild(warn);
-  // }
-
-  // // 表示上限オーバー
-  // if (truncated) {
-  //   const notice = document.createElement("div");
-  //   notice.className = "truncate-notice";
-  //   notice.textContent = truncatedNotice;
-  //   resultArea.appendChild(notice);
-  // }
-
   const header = document.createElement("div");
   header.className = "result-header";
 
@@ -262,6 +250,7 @@ function setSearching(isSearching: boolean) {
   const folderInput = document.getElementById("folderInput") as HTMLInputElement;
   const keywordInput = document.getElementById("keywordInput") as HTMLInputElement;
   const ignoreCaseInput = document.getElementById("ignoreCaseInput") as HTMLInputElement;
+  const dateSearchInput = document.getElementById("dateSearchInput") as HTMLInputElement;
   const fileDialogBtn = document.getElementById("fileDialogBtn") as HTMLButtonElement;
   const csvBtn = document.getElementById("csvBtn") as HTMLButtonElement;
 
@@ -271,6 +260,7 @@ function setSearching(isSearching: boolean) {
   folderInput.disabled = isSearching;
   keywordInput.disabled = isSearching;
   ignoreCaseInput.disabled = isSearching;
+  dateSearchInput.disabled = isSearching;
   fileDialogBtn.disabled = isSearching;
   csvBtn.disabled = isSearching;
 

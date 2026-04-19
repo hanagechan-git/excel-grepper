@@ -4,6 +4,7 @@
     "select": "Select",
     "keyword": "Keyword",
     "ignoreCase": "Case-insensitive",
+    "dateSearch": "Date cell search (YYYYMMDD with * wildcard)",
     "search": "Search",
     "cancel": "Cancel",
     "csv": "Export CSV"
@@ -26,7 +27,21 @@
     "keywordTypeError": "The search keyword is invalid.",
     "keywordLength": "The search keyword is too long (please keep it within 200 characters).",
     "noResultsToExport": "There are no results to export.",
-    "folderInvalid": "Invalid folder path."
+    "folderRequired": "Please enter a folder path.",
+    "folderRelativeNotAllowed": "Relative paths are not allowed.",
+    "folderMustBeAbsolute": "Please specify an absolute path.",
+    "folderNotFound": "The specified folder was not found.",
+    "folderNotDirectory": "The specified path is not a directory.",
+    "folderNotAccessible": "The folder cannot be accessed.",
+    "dateMaskInvalid": "The date search input is invalid.",
+    "InvalidLengthError": "The date mask must be exactly 8 characters.",
+    "InvalidCharacterError": "Only digits and * are allowed in the date mask.",
+    "AllAsterisksError": "A mask of only asterisks (********) is not allowed.",
+    "InvalidWildcardPatternError": "The wildcard pattern in the date mask is invalid.",
+    "InvalidMonthError": "The month value is invalid.",
+    "InvalidDayError": "The day value is invalid.",
+    "InvalidMonthDayError": "The month/day combination is invalid.",
+    "InvalidLeapDayError": "February 29 is not valid for a non-leap year."
   },
   "dialog": {
     "saveCsv": "Save as CSV"

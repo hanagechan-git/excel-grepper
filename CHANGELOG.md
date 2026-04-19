@@ -2,10 +2,25 @@
 
 All notable changes to the "excel-grepper" extension will be documented in this file.
 
-# 1.3.0
+# 1.5.0
+## Date cell search
+- Added support for searching date‑typed cells using Excel‑compatible date serial logic
+- Accepts 8‑digit date masks using numbers and *
+- Examples: 20260420, 202604**, 2026****, ****0420, ******20
+- Matches only true date‑typed cells, not text-formatted dates
+- Fully compatible with Excel’s internal date system (including the 1900‑02‑29 behavior)
+
+## 1.4.0
+### Added real‑time search progress display.
+- The number of scanned files and the file currently being processed are now shown during searches, making progress easier to understand.
+
+### Added a results‑area notice for Excel files with abnormally large internal structures.
+- Files that could not be processed due to extremely large internal XML structures are now listed with their relative paths so users can identify them easily.
+
+## 1.3.0
 - You can now select folders located on a file server when starting a search
 
-# 1.2.0
+## 1.2.0
 - Improved behavior when switching tabs
   Search status (searching / search results) is now correctly restored after switching tabs
 - Internal code cleanup for improved stability

@@ -2,6 +2,8 @@
 import JSZip from "jszip";
 import { grepSharedStrings } from "./grepSharedStrings";
 import { findCells } from "./findCells";
+import { DateMask } from "../../common/dateTypes";
+import { findDateCells } from "../date/findDateCells";
 
 export interface CellGrepResult {
   fileName: string;   // 後で複数ファイル対応するときに使う
@@ -21,7 +23,8 @@ export async function grepExcelCells(
   sheetMap: Record<number, string>,
   keyword: string,
   ignoreCase: boolean,
-  limitedSheetName?: string
+  dateMask: DateMask | null,
+  limitedSheetName?: string,
 ): Promise<CellGrepResult[]> {
 
   const results: CellGrepResult[] = [];
@@ -41,23 +44,25 @@ export async function grepExcelCells(
     }
 
     // sheet.xml を解析してセルを検索
-    const cells = await findCells(
-      zip,
-      sheetNumber,
-      sharedStrings,
-      keyword,
-      ignoreCase
-    );
+    if (dateMask === null) {
+      // 文字列検索
+      const found = await findCells(zip, sheetNumber, sharedStrings, keyword, ignoreCase);
+      results.push(...found.map(f => ({
+        fileName,
+        sheetName: sheetMap[sheetNumber],
+        cellAddress: f.cellAddress,
+        matchTxt: f.matchTxt
+      })));
 
-    // 結果をまとめる
-    for (const c of cells) {
-
-      results.push({
-        fileName: fileName,
-        sheetName,
-        cellAddress: c.cellAddress,
-        matchTxt: c.matchTxt
-      });
+    } else {
+      // 日付検索
+      const found = await findDateCells(zip, sheetNumber, dateMask);
+      results.push(...found.map(f => ({
+        fileName,
+        sheetName: sheetMap[sheetNumber],
+        cellAddress: f.cellAddress,
+        matchTxt: f.matchTxt
+      })));
     }
   }
 
