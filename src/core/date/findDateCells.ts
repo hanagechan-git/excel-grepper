@@ -2,7 +2,8 @@
 
 import JSZip from "jszip";
 import { DateMask } from "../../common/dateTypes";
-import { matchDateMask } from "./dateMatcher";
+import { matchDateMask , serialToYMD } from "./dateMatcher";
+import { formatYMD } from "./dateFormatter";
 
 export interface FoundDateCell {
   cellAddress: string;
@@ -83,9 +84,12 @@ export async function findDateCells(
     // 日付マスクと一致判定
     // -------------------------
     if (matchDateMask(mask, serial)) {
+
+      const ymd = serialToYMD(serial);
+      const formatted = formatYMD(ymd.year, ymd.month, ymd.day);
       results.push({
         cellAddress,
-        matchTxt: raw // 他の grep と同じく文字列で返す
+        matchTxt: formatted // 他の grep と同じく文字列で返す
       });
     }
 

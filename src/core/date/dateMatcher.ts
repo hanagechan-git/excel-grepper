@@ -4,7 +4,7 @@ import { DateMask } from "../../common/dateTypes";
 import { isLeapYear, getLastDayOfMonth } from "../../dateCheck/dateUtils";
 
 // セルのシリアル値を YYYY, MM, DD に分解する
-function serialToYMD(serial: number): { year: number; month: number; day: number } {
+export function serialToYMD(serial: number): { year: number; month: number; day: number } {
 
   // Excel の 1900/2/29 バグ対応
   // serial=60 は「存在しない 1900/2/29」

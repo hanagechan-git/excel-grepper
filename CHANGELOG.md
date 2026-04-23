@@ -2,8 +2,12 @@
 
 All notable changes to the "excel-grepper" extension will be documented in this file.
 
-# 1.5.0
-## Date cell search
+# 1.6.0
+- Date search results now show human-readable dates instead of Excel serial numbers.  
+  (YYYY/MM/DD for Japanese locale, YYYY-MM-DD for others)
+
+## 1.5.0
+### Date cell search
 - Added support for searching date‑typed cells using Excel‑compatible date serial logic
 - Accepts 8‑digit date masks using numbers and *
 - Examples: 20260420, 202604**, 2026****, ****0420, ******20
@@ -21,9 +25,9 @@ All notable changes to the "excel-grepper" extension will be documented in this 
 - You can now select folders located on a file server when starting a search
 
 ## 1.2.0
-- Improved behavior when switching tabs
+- Improved behavior when switching tabs  
   Search status (searching / search results) is now correctly restored after switching tabs
-- Internal code cleanup for improved stability
+- Internal code cleanup for improved stability  
 
 ## 1.1.0
 - Bug fix
