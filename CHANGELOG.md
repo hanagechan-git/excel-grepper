@@ -2,7 +2,10 @@
 
 All notable changes to the "excel-grepper" extension will be documented in this file.
 
-# 1.6.0
+# 1.7.0
+- It supports multiple languages... probably. Depends on the environment.
+
+## 1.6.0
 - Date search results now show human-readable dates instead of Excel serial numbers.  
   (YYYY/MM/DD for Japanese locale, YYYY-MM-DD for others)
 

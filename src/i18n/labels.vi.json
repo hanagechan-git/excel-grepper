@@ -1,0 +1,52 @@
+{
+  "search": {
+    "filePath": "Đường dẫn thư mục",
+    "select": "Chọn",
+    "keyword": "Từ khóa",
+    "ignoreCase": "Bỏ qua chữ hoa/thường",
+    "dateSearch": "Tìm ô kiểu ngày (YYYYMMDD với * wildcard)",
+    "search": "Tìm kiếm",
+    "cancel": "Hủy",
+    "csv": "Xuất CSV"
+  },
+  "result": {
+    "noResult": "Không tìm thấy kết quả phù hợp.",
+    "truncatedNotice": "⚠️ Hơn 2000 kết quả, một phần đã được rút gọn. Hãy xuất CSV để xem đầy đủ.",
+    "unreadableFilesHeader": "⚠️ Các tệp Excel sau quá lớn hoặc bất thường, đã bị loại khỏi tìm kiếm:",
+    "files": "tệp",
+    "hits": "lần trùng khớp",
+    "target": "Mục tiêu",
+    "filename": "Tên tệp",
+    "sheet": "Sheet",
+    "cell": "Ô",
+    "text": "Văn bản",
+    "shape": "Số hình"
+  },
+  "alert": {
+    "keywordRequired": "Vui lòng nhập từ khóa. 😐",
+    "keywordTypeError": "Định dạng từ khóa không hợp lệ. 😵",
+    "keywordLength": "Từ khóa phải dưới 200 ký tự. 😵",
+    "noResultsToExport": "Không có kết quả để xuất. 📄",
+    "folderRequired": "Vui lòng nhập đường dẫn thư mục. 😐",
+    "folderRelativeNotAllowed": "Không thể dùng đường dẫn tương đối. 😱",
+    "folderMustBeAbsolute": "Hãy dùng đường dẫn tuyệt đối. 😱",
+    "folderNotFound": "Không tìm thấy thư mục đã chỉ định. 😱",
+    "folderNotDirectory": "Đường dẫn không phải thư mục. 😱",
+    "folderNotAccessible": "Không thể truy cập thư mục. 😱",
+    "dateMaskInvalid": "Đầu vào tìm ngày không hợp lệ. 😵",
+    "InvalidLengthError": "Đầu vào tìm ngày phải gồm 8 ký tự. 😵",
+    "InvalidCharacterError": "Chỉ được dùng số hoặc * trong tìm ngày. 😵",
+    "AllAsterisksError": "Không thể dùng ******** toàn dấu *. 😵",
+    "InvalidWildcardPatternError": "Wildcard ngày không hợp lệ. 😵",
+    "InvalidMonthError": "Tháng không hợp lệ. 😵",
+    "InvalidDayError": "Ngày không hợp lệ. 😵",
+    "InvalidMonthDayError": "Kết hợp tháng/ngày không hợp lệ. 🤯",
+    "InvalidLeapDayError": "Năm không nhuận, không thể dùng 29/02. 🤯"
+  },
+  "dialog": {
+    "saveCsv": "Lưu dưới dạng CSV"
+  },
+  "info": {
+    "csvSaved": "Đã lưu CSV!"
+  }
+}

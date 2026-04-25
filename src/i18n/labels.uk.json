@@ -1,0 +1,52 @@
+{
+  "search": {
+    "filePath": "Шлях до папки",
+    "select": "Вибрати",
+    "keyword": "Ключове слово",
+    "ignoreCase": "Ігнорувати регістр",
+    "dateSearch": "Пошук за датою (YYYYMMDD з * wildcard)",
+    "search": "Пошук",
+    "cancel": "Скасувати",
+    "csv": "Експорт CSV"
+  },
+  "result": {
+    "noResult": "Відповідних результатів не знайдено.",
+    "truncatedNotice": "⚠️ Понад 2000 результатів. Частину приховано. Експортуйте CSV для повного перегляду.",
+    "unreadableFilesHeader": "⚠️ Наступні файли Excel надто великі або пошкоджені, тому виключені з пошуку:",
+    "files": "файлів",
+    "hits": "співпадінь",
+    "target": "Ціль",
+    "filename": "Назва файлу",
+    "sheet": "Аркуш",
+    "cell": "Комірка",
+    "text": "Текст",
+    "shape": "Номер фігури"
+  },
+  "alert": {
+    "keywordRequired": "Введіть ключове слово. 😐",
+    "keywordTypeError": "Неправильний формат ключового слова. 😵",
+    "keywordLength": "Ключове слово має бути менше 200 символів. 😵",
+    "noResultsToExport": "Немає результатів для експорту. 📄",
+    "folderRequired": "Введіть шлях до папки. 😐",
+    "folderRelativeNotAllowed": "Відносні шляхи заборонені. 😱",
+    "folderMustBeAbsolute": "Використовуйте абсолютний шлях. 😱",
+    "folderNotFound": "Вказану папку не знайдено. 😱",
+    "folderNotDirectory": "Шлях не є папкою. 😱",
+    "folderNotAccessible": "Немає доступу до папки. 😱",
+    "dateMaskInvalid": "Неправильне значення для пошуку дати. 😵",
+    "InvalidLengthError": "Значення має містити 8 символів. 😵",
+    "InvalidCharacterError": "Дозволені лише цифри або *. 😵",
+    "AllAsterisksError": "******** використовувати не можна. 😵",
+    "InvalidWildcardPatternError": "Неправильний шаблон wildcard. 😵",
+    "InvalidMonthError": "Неправильний місяць. 😵",
+    "InvalidDayError": "Неправильний день. 😵",
+    "InvalidMonthDayError": "Неправильна комбінація місяця і дня. 🤯",
+    "InvalidLeapDayError": "Це не високосний рік — 29 лютого недопустимо. 🤯"
+  },
+  "dialog": {
+    "saveCsv": "Зберегти як CSV"
+  },
+  "info": {
+    "csvSaved": "CSV збережено!"
+  }
+}

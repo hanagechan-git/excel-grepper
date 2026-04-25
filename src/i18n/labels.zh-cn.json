@@ -1,0 +1,52 @@
+{
+  "search": {
+    "filePath": "文件夹路径",
+    "select": "选择",
+    "keyword": "关键词",
+    "ignoreCase": "忽略大小写",
+    "dateSearch": "日期搜索 (YYYYMMDD，支持 * wildcard)",
+    "search": "搜索",
+    "cancel": "取消",
+    "csv": "导出 CSV"
+  },
+  "result": {
+    "noResult": "未找到匹配结果。",
+    "truncatedNotice": "⚠️ 结果超过 2000 条，部分已隐藏。请导出 CSV 查看全部内容。",
+    "unreadableFilesHeader": "⚠️ 以下 Excel 文件过大或异常，已从搜索中排除：",
+    "files": "个文件",
+    "hits": "次匹配",
+    "target": "目标",
+    "filename": "文件名",
+    "sheet": "工作表",
+    "cell": "单元格",
+    "text": "文本",
+    "shape": "形状编号"
+  },
+  "alert": {
+    "keywordRequired": "请输入关键词。😐",
+    "keywordTypeError": "关键词格式无效。😵",
+    "keywordLength": "关键词长度必须小于 200 个字符。😵",
+    "noResultsToExport": "没有可导出的结果。📄",
+    "folderRequired": "请输入文件夹路径。😐",
+    "folderRelativeNotAllowed": "不支持相对路径。😱",
+    "folderMustBeAbsolute": "请使用绝对路径。😱",
+    "folderNotFound": "未找到指定的文件夹。😱",
+    "folderNotDirectory": "路径不是文件夹。😱",
+    "folderNotAccessible": "无法访问该文件夹。😱",
+    "dateMaskInvalid": "日期搜索输入无效。😵",
+    "InvalidLengthError": "日期输入必须为 8 位。😵",
+    "InvalidCharacterError": "日期搜索仅允许数字或 *。😵",
+    "AllAsterisksError": "不能使用 ******** 这种全通配符。😵",
+    "InvalidWildcardPatternError": "日期 wildcard 格式无效。😵",
+    "InvalidMonthError": "月份无效。😵",
+    "InvalidDayError": "日期无效。😵",
+    "InvalidMonthDayError": "月份与日期组合无效。🤯",
+    "InvalidLeapDayError": "该年份不是闰年，不能使用 2 月 29 日。🤯"
+  },
+  "dialog": {
+    "saveCsv": "保存为 CSV"
+  },
+  "info": {
+    "csvSaved": "CSV 已保存！"
+  }
+}

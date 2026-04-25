@@ -1,0 +1,52 @@
+{
+  "search": {
+    "filePath": "Ścieżka folderu",
+    "select": "Wybierz",
+    "keyword": "Słowo kluczowe",
+    "ignoreCase": "Ignoruj wielkość liter",
+    "dateSearch": "Wyszukiwanie daty (YYYYMMDD z * wildcard)",
+    "search": "Szukaj",
+    "cancel": "Anuluj",
+    "csv": "Eksport CSV"
+  },
+  "result": {
+    "noResult": "Brak pasujących wyników.",
+    "truncatedNotice": "⚠️ Ponad 2000 wyników. Część została ukryta. Wyeksportuj CSV, aby zobaczyć całość.",
+    "unreadableFilesHeader": "⚠️ Następujące pliki Excel są zbyt duże lub uszkodzone i zostały pominięte w wyszukiwaniu:",
+    "files": "plików",
+    "hits": "trafień",
+    "target": "Cel",
+    "filename": "Nazwa pliku",
+    "sheet": "Arkusz",
+    "cell": "Komórka",
+    "text": "Tekst",
+    "shape": "Numer kształtu"
+  },
+  "alert": {
+    "keywordRequired": "Wprowadź słowo kluczowe. 😐",
+    "keywordTypeError": "Nieprawidłowy format słowa kluczowego. 😵",
+    "keywordLength": "Słowo kluczowe musi mieć mniej niż 200 znaków. 😵",
+    "noResultsToExport": "Brak wyników do eksportu. 📄",
+    "folderRequired": "Wprowadź ścieżkę folderu. 😐",
+    "folderRelativeNotAllowed": "Ścieżki względne są niedozwolone. 😱",
+    "folderMustBeAbsolute": "Użyj ścieżki bezwzględnej. 😱",
+    "folderNotFound": "Nie znaleziono wskazanego folderu. 😱",
+    "folderNotDirectory": "Ścieżka nie jest folderem. 😱",
+    "folderNotAccessible": "Brak dostępu do folderu. 😱",
+    "dateMaskInvalid": "Nieprawidłowe dane wejściowe dla wyszukiwania daty. 😵",
+    "InvalidLengthError": "Wartość musi mieć 8 znaków. 😵",
+    "InvalidCharacterError": "Dozwolone są tylko cyfry lub *. 😵",
+    "AllAsterisksError": "******** jest niedozwolone. 😵",
+    "InvalidWildcardPatternError": "Nieprawidłowy wzór wildcard. 😵",
+    "InvalidMonthError": "Nieprawidłowy miesiąc. 😵",
+    "InvalidDayError": "Nieprawidłowy dzień. 😵",
+    "InvalidMonthDayError": "Nieprawidłowa kombinacja miesiąca i dnia. 🤯",
+    "InvalidLeapDayError": "To nie jest rok przestępny — 29 lutego jest niedozwolone. 🤯"
+  },
+  "dialog": {
+    "saveCsv": "Zapisz jako CSV"
+  },
+  "info": {
+    "csvSaved": "CSV zapisano!"
+  }
+}

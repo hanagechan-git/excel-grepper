@@ -1,0 +1,52 @@
+{
+  "search": {
+    "filePath": "De' qach He",
+    "select": "wIv",
+    "keyword": "mu' wej",
+    "ignoreCase": "pIqaD tInHom tInqu' buSHa'",
+    "dateSearch": "poH nej (YYYYMMDD * chaw')",
+    "search": "nej",
+    "cancel": "qIl",
+    "csv": "CSV ngeH"
+  },
+  "result": {
+    "noResult": "DoH. tu'lu'be'.",
+    "truncatedNotice": "⚠️ 2000 Dun law' tu'lu'. 'ay' pe'lu'. CSV yIngeH tIleghmeH.",
+    "unreadableFilesHeader": "⚠️ De' qachmeyvam tInqu' pagh QIH. nejlu'be'.",
+    "files": "qachmey",
+    "hits": "nejlu'pu'",
+    "target": "DoS",
+    "filename": "pong",
+    "sheet": "nav",
+    "cell": "pa'",
+    "text": "ghItlh",
+    "shape": "naghHom mI'"
+  },
+  "alert": {
+    "keywordRequired": "mu' wej yI'ang. 😐",
+    "keywordTypeError": "mu' wej Qagh. 😵",
+    "keywordLength": "mu' wej tIn law' 200 tIn puS. 😵",
+    "noResultsToExport": "ngeHmeH pagh tu'lu'. 📄",
+    "folderRequired": "He yI'ang. 😐",
+    "folderRelativeNotAllowed": "He DopHa' chaw'be'. 😱",
+    "folderMustBeAbsolute": "He naQ yIlo'. 😱",
+    "folderNotFound": "He tu'lu'be'. 😱",
+    "folderNotDirectory": "He qachbe'. 😱",
+    "folderNotAccessible": "He naw'laHbe'. 😱",
+    "dateMaskInvalid": "poH wej Qagh. 😵",
+    "InvalidLengthError": "8 mI' neH. 😵",
+    "InvalidCharacterError": "mI' pagh * neH chaw'. 😵",
+    "AllAsterisksError": "******** Qaghqu'. 😵",
+    "InvalidWildcardPatternError": "wildcard Qagh. 😵",
+    "InvalidMonthError": "jar Qagh. 😵",
+    "InvalidDayError": "jaj Qagh. 😵",
+    "InvalidMonthDayError": "jar/jaj Qagh. 🤯",
+    "InvalidLeapDayError": "DISvam ghItlhbe' 29 Feb. 🤯"
+  },
+  "dialog": {
+    "saveCsv": "CSV pol"
+  },
+  "info": {
+    "csvSaved": "CSV pollu'!"
+  }
+}

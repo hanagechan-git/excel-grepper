@@ -1,0 +1,52 @@
+{
+  "search": {
+    "filePath": "Path folder",
+    "select": "Pilih",
+    "keyword": "Kata kunci",
+    "ignoreCase": "Abaikan huruf besar/kecil",
+    "dateSearch": "Cari sel tanggal (YYYYMMDD dengan * wildcard)",
+    "search": "Cari",
+    "cancel": "Batal",
+    "csv": "Ekspor CSV"
+  },
+  "result": {
+    "noResult": "Tidak ada hasil yang cocok.",
+    "truncatedNotice": "⚠️ Lebih dari 2000 hasil, sebagian ditampilkan secara ringkas. Silakan ekspor CSV untuk melihat lengkap.",
+    "unreadableFilesHeader": "⚠️ File Excel berikut terlalu besar atau tidak normal, sehingga dikecualikan dari pencarian:",
+    "files": "file",
+    "hits": "temuan",
+    "target": "Target",
+    "filename": "Nama file",
+    "sheet": "Sheet",
+    "cell": "Sel",
+    "text": "Teks",
+    "shape": "Nomor bentuk"
+  },
+  "alert": {
+    "keywordRequired": "Masukkan kata kunci. 😐",
+    "keywordTypeError": "Format kata kunci tidak valid. 😵",
+    "keywordLength": "Kata kunci harus kurang dari 200 karakter. 😵",
+    "noResultsToExport": "Tidak ada hasil untuk diekspor. 📄",
+    "folderRequired": "Masukkan path folder. 😐",
+    "folderRelativeNotAllowed": "Path relatif tidak diperbolehkan. 😱",
+    "folderMustBeAbsolute": "Gunakan path absolut. 😱",
+    "folderNotFound": "Folder yang ditentukan tidak ditemukan. 😱",
+    "folderNotDirectory": "Path tersebut bukan folder. 😱",
+    "folderNotAccessible": "Folder tidak dapat diakses. 😱",
+    "dateMaskInvalid": "Input pencarian tanggal tidak valid. 😵",
+    "InvalidLengthError": "Input pencarian tanggal harus 8 karakter. 😵",
+    "InvalidCharacterError": "Hanya angka atau * yang diperbolehkan. 😵",
+    "AllAsterisksError": "******** tidak diperbolehkan. 😵",
+    "InvalidWildcardPatternError": "Pola wildcard tanggal tidak valid. 😵",
+    "InvalidMonthError": "Bulan tidak valid. 😵",
+    "InvalidDayError": "Hari tidak valid. 😵",
+    "InvalidMonthDayError": "Kombinasi bulan/hari tidak valid. 🤯",
+    "InvalidLeapDayError": "Bukan tahun kabisat, 29 Februari tidak valid. 🤯"
+  },
+  "dialog": {
+    "saveCsv": "Simpan sebagai CSV"
+  },
+  "info": {
+    "csvSaved": "CSV telah disimpan!"
+  }
+}

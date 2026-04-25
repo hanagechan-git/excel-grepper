@@ -1,0 +1,52 @@
+{
+  "search": {
+    "filePath": "フォルダパス",
+    "select": "選択",
+    "keyword": "キーワード",
+    "ignoreCase": "大文字小文字、どっちでもいんだべさ",
+    "dateSearch": "日付さほじぐどき (YYYYMMDD と * つかうはんで)",
+    "search": "検索",
+    "cancel": "キャンセル",
+    "csv": "CSV 出力"
+  },
+  "result": {
+    "noResult": "なんもねはんで。",
+    "truncatedNotice": "⚠️ 2000件さ超えで、ちっと隠しとったはんでよ。全部見だきゃ CSV 出せばいんでねが。",
+    "unreadableFilesHeader": "⚠️ この Excel、でっけぐてわやで、読めねはんで：",
+    "files": "ファイルだべさ",
+    "hits": "なんぼかあったど",
+    "target": "どごさ向いでらやづだべ",
+    "filename": "ファイルのなだはんで",
+    "sheet": "シートだじゃ",
+    "cell": "マスだべさ",
+    "text": "字ぃだじゃ",
+    "shape": "図形のばんごだべ"
+  },
+  "alert": {
+    "keywordRequired": "ことば入れねば、なんもわがらねはんで。😐",
+    "keywordTypeError": "ことばの形、へんでねが。😵",
+    "keywordLength": "長すぎで、まいねはんで（200文字までだべ）。❄️",
+    "noResultsToExport": "出すもん、なんもねはんでよ。📄",
+    "folderRequired": "フォルダどごさ行ぐ道、入れねばまいねべ。😐",
+    "folderRelativeNotAllowed": "相対パス、そいはまいねはんで。😱",
+    "folderMustBeAbsolute": "絶対パス使わねば、わがらねはんで。😱",
+    "folderNotFound": "そごのフォルダ、ねがったはんで。😱",
+    "folderNotDirectory": "フォルダでねはんで。😱",
+    "folderNotAccessible": "フォルダ開がらねはんで、わやだじゃ。😱",
+    "dateMaskInvalid": "日付の入れ方、へんでわがらねはんで。🍎",
+    "InvalidLengthError": "8文字で入れねば、まいねはんで。🍎",
+    "InvalidCharacterError": "数字か * しか使えねはんでよ。🍎",
+    "AllAsterisksError": "******** は、わやすぎでまいねじゃ。👹",
+    "InvalidWildcardPatternError": "ワイルドカード、形おかしぐてまいねはんで。🍎",
+    "InvalidMonthError": "月、へんでねが。❄️",
+    "InvalidDayError": "日も、へんだはんで。❄️",
+    "InvalidMonthDayError": "月と日、合わねはんでよ。🤯",
+    "InvalidLeapDayError": "その年、閏年でねはんで、2月29日まいねじゃ。👹"
+  },
+  "dialog": {
+    "saveCsv": "CSV で保存すべはんで"
+  },
+  "info": {
+    "csvSaved": "CSV 保存でぎだはんで！"
+  }
+}

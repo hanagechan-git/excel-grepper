@@ -1,0 +1,52 @@
+{
+  "search": {
+    "filePath": "資料夾路徑",
+    "select": "選擇",
+    "keyword": "關鍵字",
+    "ignoreCase": "忽略大小寫",
+    "dateSearch": "日期搜尋 (YYYYMMDD，支援 * wildcard)",
+    "search": "搜尋",
+    "cancel": "取消",
+    "csv": "匯出 CSV"
+  },
+  "result": {
+    "noResult": "沒有找到符合的結果。",
+    "truncatedNotice": "⚠️ 結果超過 2000 筆，部分已隱藏。請匯出 CSV 以查看全部內容。",
+    "unreadableFilesHeader": "⚠️ 下列 Excel 檔案過大或異常，已從搜尋中排除：",
+    "files": "個檔案",
+    "hits": "次符合",
+    "target": "目標",
+    "filename": "檔名",
+    "sheet": "工作表",
+    "cell": "儲存格",
+    "text": "文字",
+    "shape": "圖形編號"
+  },
+  "alert": {
+    "keywordRequired": "請輸入關鍵字。😐",
+    "keywordTypeError": "關鍵字格式無效。😵",
+    "keywordLength": "關鍵字必須少於 200 個字元。😵",
+    "noResultsToExport": "沒有可匯出的結果。📄",
+    "folderRequired": "請輸入資料夾路徑。😐",
+    "folderRelativeNotAllowed": "不支援相對路徑。😱",
+    "folderMustBeAbsolute": "請使用絕對路徑。😱",
+    "folderNotFound": "找不到指定的資料夾。😱",
+    "folderNotDirectory": "此路徑不是資料夾。😱",
+    "folderNotAccessible": "無法存取該資料夾。😱",
+    "dateMaskInvalid": "日期搜尋輸入無效。😵",
+    "InvalidLengthError": "日期輸入必須為 8 位數。😵",
+    "InvalidCharacterError": "日期搜尋僅允許數字或 *。😵",
+    "AllAsterisksError": "不能使用 ******** 這種全通配符。😵",
+    "InvalidWildcardPatternError": "日期 wildcard 格式無效。😵",
+    "InvalidMonthError": "月份無效。😵",
+    "InvalidDayError": "日期無效。😵",
+    "InvalidMonthDayError": "月份與日期的組合無效。🤯",
+    "InvalidLeapDayError": "此年份不是閏年，不能使用 2 月 29 日。🤯"
+  },
+  "dialog": {
+    "saveCsv": "另存為 CSV"
+  },
+  "info": {
+    "csvSaved": "CSV 已儲存！"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "search": {
+    "filePath": "Ordnerpfad",
+    "select": "Auswählen",
+    "keyword": "Suchbegriff",
+    "ignoreCase": "Groß-/Kleinschreibung ignorieren",
+    "dateSearch": "Datumssuche (YYYYMMDD mit * wildcard)",
+    "search": "Suchen",
+    "cancel": "Abbrechen",
+    "csv": "CSV exportieren"
+  },
+  "result": {
+    "noResult": "Keine passenden Ergebnisse gefunden.",
+    "truncatedNotice": "⚠️ Über 2000 Ergebnisse. Ein Teil wurde ausgeblendet. Exportiere CSV für die vollständige Ansicht.",
+    "unreadableFilesHeader": "⚠️ Die folgenden Excel-Dateien sind zu groß oder beschädigt und wurden von der Suche ausgeschlossen:",
+    "files": "Dateien",
+    "hits": "Treffer",
+    "target": "Ziel",
+    "filename": "Dateiname",
+    "sheet": "Blatt",
+    "cell": "Zelle",
+    "text": "Text",
+    "shape": "Formnummer"
+  },
+  "alert": {
+    "keywordRequired": "Bitte einen Suchbegriff eingeben. 😐",
+    "keywordTypeError": "Ungültiges Format des Suchbegriffs. 😵",
+    "keywordLength": "Der Suchbegriff muss unter 200 Zeichen liegen. 😵",
+    "noResultsToExport": "Keine Ergebnisse zum Exportieren. 📄",
+    "folderRequired": "Bitte einen Ordnerpfad eingeben. 😐",
+    "folderRelativeNotAllowed": "Relative Pfade sind nicht erlaubt. 😱",
+    "folderMustBeAbsolute": "Bitte einen absoluten Pfad verwenden. 😱",
+    "folderNotFound": "Der angegebene Ordner wurde nicht gefunden. 😱",
+    "folderNotDirectory": "Der Pfad ist kein Ordner. 😱",
+    "folderNotAccessible": "Auf den Ordner kann nicht zugegriffen werden. 😱",
+    "dateMaskInvalid": "Ungültige Eingabe für die Datumssuche. 😵",
+    "InvalidLengthError": "Die Eingabe muss 8 Zeichen enthalten. 😵",
+    "InvalidCharacterError": "Nur Ziffern oder * sind erlaubt. 😵",
+    "AllAsterisksError": "******** ist nicht zulässig. 😵",
+    "InvalidWildcardPatternError": "Ungültiges wildcard-Muster. 😵",
+    "InvalidMonthError": "Ungültiger Monat. 😵",
+    "InvalidDayError": "Ungültiger Tag. 😵",
+    "InvalidMonthDayError": "Ungültige Kombination aus Monat und Tag. 🤯",
+    "InvalidLeapDayError": "Kein Schaltjahr — der 29. Februar ist nicht zulässig. 🤯"
+  },
+  "dialog": {
+    "saveCsv": "Als CSV speichern"
+  },
+  "info": {
+    "csvSaved": "CSV gespeichert!"
+  }
+}

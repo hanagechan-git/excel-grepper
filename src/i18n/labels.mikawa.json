@@ -1,0 +1,52 @@
+{
+  "search": {
+    "filePath": "フォルダパス",
+    "select": "選択",
+    "keyword": "キーワード",
+    "ignoreCase": "大文字小文字は気にせんだら",
+    "dateSearch": "日付でさがすりん (YYYYMMDD と * つかうりん)",
+    "search": "検索",
+    "cancel": "キャンセル",
+    "csv": "CSV 出力"
+  },
+  "result": {
+    "noResult": "なんも見つからんかったじゃん。",
+    "truncatedNotice": "⚠️ 2000件より多いで、ちぃと隠しとるだら。全部見るなら CSV 出すとええりん。",
+    "unreadableFilesHeader": "⚠️ この Excel、でかすぎるか壊れとるで、調べられんかったじゃん：",
+    "files": "ファイルじゃん",
+    "hits": "件だら",
+    "target": "ターゲットじゃん",
+    "filename": "ファイル名だら",
+    "sheet": "シートりん",
+    "cell": "セルりん",
+    "text": "文字じゃん",
+    "shape": "図形の番号だら"
+  },
+  "alert": {
+    "keywordRequired": "ことば入れてほしいじゃん。😐",
+    "keywordTypeError": "ことばの形がおかしいだら。😵",
+    "keywordLength": "ことば長すぎるでいかんりん（200文字までじゃん）。🎆",
+    "noResultsToExport": "出すもん無いだら。📄",
+    "folderRequired": "フォルダの道、入れてほしいじゃん。😐",
+    "folderRelativeNotAllowed": "相対パスはあかんだら。😱",
+    "folderMustBeAbsolute": "絶対パス使ってほしいりん。😱",
+    "folderNotFound": "そのフォルダ無かったじゃん。😱",
+    "folderNotDirectory": "フォルダじゃないだら。😱",
+    "folderNotAccessible": "フォルダ開けんかったりん。😱",
+    "dateMaskInvalid": "日付の入れ方がおかしいじゃん。😵",
+    "InvalidLengthError": "8文字で入れてほしいだら。🎇",
+    "InvalidCharacterError": "数字か * しか使えんりん。🎇",
+    "AllAsterisksError": "******** はさすがにいかんじゃん。🎇",
+    "InvalidWildcardPatternError": "ワイルドカードの形がおかしいだら。🎇",
+    "InvalidMonthError": "月がおかしいりん。😵",
+    "InvalidDayError": "日がおかしいじゃん。😵",
+    "InvalidMonthDayError": "月と日の組み合わせが変だら。🤯",
+    "InvalidLeapDayError": "その年はうるう年じゃないで、2月29日は無理りん。🤯"
+  },
+  "dialog": {
+    "saveCsv": "CSV で保存するりん"
+  },
+  "info": {
+    "csvSaved": "CSV 保存できたじゃん！"
+  }
+}

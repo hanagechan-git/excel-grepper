@@ -1,0 +1,52 @@
+{
+  "search": {
+    "filePath": "საქაღალდის ბილიკი",
+    "select": "არჩევა",
+    "keyword": "საკვანძო სიტყვა",
+    "ignoreCase": "რეგისტრის იგნორირება",
+    "dateSearch": "თარიღის ძიება (YYYYMMDD * wildcard-ით)",
+    "search": "ძიება",
+    "cancel": "გაუქმება",
+    "csv": "CSV ექსპორტი"
+  },
+  "result": {
+    "noResult": "შესაბამისი შედეგი ვერ მოიძებნა.",
+    "truncatedNotice": "⚠️ 2000-ზე მეტი შედეგია. ნაწილი დამალულია. სრული სანახავად ექსპორტეთ CSV.",
+    "unreadableFilesHeader": "⚠️ შემდეგი Excel ფაილები ძალიან დიდია ან დაზიანებული და ძიებიდან გამორიცხულია:",
+    "files": "ფაილი",
+    "hits": "დამთხვევა",
+    "target": "ობიექტი",
+    "filename": "ფაილის სახელი",
+    "sheet": "ფურცელი",
+    "cell": "უჯრა",
+    "text": "ტექსტი",
+    "shape": "ფიგურის ნომერი"
+  },
+  "alert": {
+    "keywordRequired": "შეიყვანეთ საკვანძო სიტყვა. 😐",
+    "keywordTypeError": "საკვანძო სიტყვის ფორმატი არასწორია. 😵",
+    "keywordLength": "საკვანძო სიტყვა უნდა იყოს 200 სიმბოლოზე ნაკლები. 😵",
+    "noResultsToExport": "ექსპორტისთვის შედეგები არ არის. 📄",
+    "folderRequired": "შეიყვანეთ საქაღალდის ბილიკი. 😐",
+    "folderRelativeNotAllowed": "ფარდობითი ბილიკები დაუშვებელია. 😱",
+    "folderMustBeAbsolute": "გამოიყენეთ აბსოლუტური ბილიკი. 😱",
+    "folderNotFound": "მითითებული საქაღალდე ვერ მოიძებნა. 😱",
+    "folderNotDirectory": "ბილიკი საქაღალდე არ არის. 😱",
+    "folderNotAccessible": "საქაღალდესთან წვდომა შეუძლებელია. 😱",
+    "dateMaskInvalid": "თარიღის ძიების შეყვანა არასწორია. 😵",
+    "InvalidLengthError": "მნიშვნელობა უნდა შეიცავდეს 8 სიმბოლოს. 😵",
+    "InvalidCharacterError": "დაშვებულია მხოლოდ ციფრები ან *. 😵",
+    "AllAsterisksError": "******** მიუღებელია. 😵",
+    "InvalidWildcardPatternError": "wildcard შაბლონი არასწორია. 😵",
+    "InvalidMonthError": "თვე არასწორია. 😵",
+    "InvalidDayError": "დღე არასწორია. 😵",
+    "InvalidMonthDayError": "თვე/დღის კომბინაცია არასწორია. 🤯",
+    "InvalidLeapDayError": "არ არის ნაკიანი წელი — 29 თებერვალი დაუშვებელია. 🤯"
+  },
+  "dialog": {
+    "saveCsv": "შენახვა CSV ფორმატში"
+  },
+  "info": {
+    "csvSaved": "CSV შენახულია!"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "search": {
+    "filePath": "Путь к папке",
+    "select": "Выбрать",
+    "keyword": "Ключевое слово",
+    "ignoreCase": "Игнорировать регистр",
+    "dateSearch": "Поиск по дате (YYYYMMDD с * wildcard)",
+    "search": "Поиск",
+    "cancel": "Отмена",
+    "csv": "Экспорт CSV"
+  },
+  "result": {
+    "noResult": "Совпадений не найдено.",
+    "truncatedNotice": "⚠️ Более 2000 результатов. Часть скрыта. Экспортируйте CSV для полного просмотра.",
+    "unreadableFilesHeader": "⚠️ Следующие файлы Excel слишком большие или повреждены и исключены из поиска:",
+    "files": "файлов",
+    "hits": "совпадений",
+    "target": "Цель",
+    "filename": "Имя файла",
+    "sheet": "Лист",
+    "cell": "Ячейка",
+    "text": "Текст",
+    "shape": "Номер фигуры"
+  },
+  "alert": {
+    "keywordRequired": "Введите ключевое слово. 😐",
+    "keywordTypeError": "Неверный формат ключевого слова. 😵",
+    "keywordLength": "Ключевое слово должно быть короче 200 символов. 😵",
+    "noResultsToExport": "Нет результатов для экспорта. 📄",
+    "folderRequired": "Введите путь к папке. 😐",
+    "folderRelativeNotAllowed": "Относительные пути недопустимы. 😱",
+    "folderMustBeAbsolute": "Используйте абсолютный путь. 😱",
+    "folderNotFound": "Указанная папка не найдена. 😱",
+    "folderNotDirectory": "Путь не является папкой. 😱",
+    "folderNotAccessible": "Нет доступа к папке. 😱",
+    "dateMaskInvalid": "Неверный ввод для поиска даты. 😵",
+    "InvalidLengthError": "Ввод должен содержать 8 символов. 😵",
+    "InvalidCharacterError": "Разрешены только цифры и *. 😵",
+    "AllAsterisksError": "******** использовать нельзя. 😵",
+    "InvalidWildcardPatternError": "Неверный шаблон wildcard. 😵",
+    "InvalidMonthError": "Неверный месяц. 😵",
+    "InvalidDayError": "Неверный день. 😵",
+    "InvalidMonthDayError": "Неверная комбинация месяца и дня. 🤯",
+    "InvalidLeapDayError": "Не високосный год — 29 февраля недопустимо. 🤯"
+  },
+  "dialog": {
+    "saveCsv": "Сохранить как CSV"
+  },
+  "info": {
+    "csvSaved": "CSV сохранён!"
+  }
+}
