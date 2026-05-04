@@ -12,9 +12,9 @@ export type ToWebviewMessage =
     }
   | {
       type: "progress";
-      scanned: number;
+      done: number;
       total: number;
-      currentFile: string; 
+      lastCompleted: string;
     }
   | {
       type: "searchError";

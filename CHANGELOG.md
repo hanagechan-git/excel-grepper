@@ -2,7 +2,14 @@
 
 All notable changes to the "excel-grepper" extension will be documented in this file.
 
-# 1.7.0
+# 1.8.0
+## Performance Improvements
+- Added parallel search that processes multiple files simultaneously
+- Automatically selects the optimal number of workers based on CPU cores
+- Significant speed improvements in environments with large numbers of files  
+  (1.5× to 3× faster depending on the system)
+
+## 1.7.0
 - It supports multiple languages... probably. Depends on the environment.
 
 ## 1.6.0

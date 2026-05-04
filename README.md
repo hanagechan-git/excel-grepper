@@ -114,3 +114,32 @@ Built with:
 ## 📄 License
 
 MIT License
+
+------------------------------------------------------------
+## 💛 Pay It Forward (Optional)
+
+This project is released under the MIT License.
+
+If this software is useful to you, consider paying it forward
+by supporting disaster relief efforts, community aid, or any
+activity that helps people in need.
+
+No proof, report, or verification is required.
+This is entirely voluntary and based on your goodwill.
+
+Thank you for contributing to a better world in your own way.
+
+---
+
+### 💛 ペイフォワード（任意）
+
+このプロジェクトは MIT ライセンスの下で公開されています。
+
+もしこのソフトウェアが役に立ったなら、
+災害支援、地域の助け合い、困っている人を助ける活動など、
+何らかの形でペイフォワードしていただけると嬉しいです。
+
+証明や報告は一切必要ありません。
+これは完全に任意であり、あなたの善意に委ねられています。
+
+あなたなりの形で、より良い世界に貢献してくれてありがとう。

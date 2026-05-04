@@ -4,7 +4,7 @@
 // -----------------------------
 import * as vscode from "vscode";
 import type { Labels } from "../common/labels";
-import { getNonce } from "../extension/getNonce";
+import { getNonce } from "../extensionCore/getNonce";
 
 export function getWebviewContent(
   context: vscode.ExtensionContext,

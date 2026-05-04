@@ -6,20 +6,30 @@ import * as path from "path";
 import { FromWebviewMessage } from "./common/message";
 import { getlang, getLabels } from "./i18n/i18n";
 
-import { postInitLabels , postRestoreState , postSearchError ,postFolderSelected } from "./extension/messaging";
-import { state } from "./extension/state";
+import {
+  postInitLabels,
+  postRestoreState,
+  postSearchError,
+  postFolderSelected
+} from "./extensionCore/messaging";
+
+import {
+  createInitialState,
+  ExtensionState
+} from "./extensionCore/state";
 
 import { validateKeyword } from "./validation/validateKeyword";
 import { validateFolderPath } from "./validation/validateFolderPath";
 import { validateDateSearch } from "./validation/validateDateSearch";
 
-import { exportCsv } from "./extension/exportCsv";
-import { startSearch } from "./extension/startSearch";
+import { exportCsv } from "./extensionCore/exportCsv";
+import { startSearch } from "./search/startSearch";
 import { getWebviewContent } from "./ui/getWebviewContent";
-import { openExcelFile } from "./extension/openExcelFile";
+import { openExcelFile } from "./extensionCore/openExcelFile";
 // import { quoteSheetNameIfNeeded } from "./extension/sanitize";
 
 let panel: vscode.WebviewPanel | undefined;
+let state: ExtensionState = createInitialState();
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -31,7 +41,7 @@ export function activate(context: vscode.ExtensionContext) {
       return;
     }
 
-    // 初期フォルダ
+    // 初期フォルダ設定
     state.lastState.folder =
       vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? "";
 
@@ -47,38 +57,35 @@ export function activate(context: vscode.ExtensionContext) {
       }
     );
 
+    // Webview が閉じられたら state を初期化
     panel.onDidDispose(() => {
       panel = undefined;
 
       // state 初期化
-      state.results = [];
-      state.cancelRequested = false;
-      state.isSearching = false;
+      state = createInitialState();
+      state.lastState.folder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? "";
 
-      state.lastState = {
-        folder: vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? "",
-        keyword: null,
-        ignoreCase: false,
-        dateSearchEnabled: false,
-        results: null,
-        fileCount: 0,
-        unreadableMessage: null,
-        truncated: false,
-        truncatedNotice: null
-      };
     });
 
     const labels = getLabels();
     const lang = getlang(vscode.env.language);
 
-    panel.webview.html = getWebviewContent(context, panel.webview, labels, lang);
+    panel.webview.html = getWebviewContent(
+      context,
+      panel.webview,
+      labels,
+      lang
+    );
 
     // WebView 初期化時に labels を送る
     postInitLabels(panel, labels);
 
     panel.webview.onDidReceiveMessage(async (msg: FromWebviewMessage) => {
-      switch (msg.type) {
+      if (!panel) {
+        return; // panel が undefined の場合は安全に抜ける
+      }
 
+      switch (msg.type) {
         case "restoreState": {
           postRestoreState(panel, state.lastState, state.isSearching);
           break;
@@ -94,25 +101,26 @@ export function activate(context: vscode.ExtensionContext) {
             // 2. フォルダパス検証
             validateFolderPath(folder, labels);
             // 3. 日付検索検証（必要なときだけ）
-            const dateMask = validateDateSearch(keyword, dateSearchEnabled, labels);
+            const dateMask = validateDateSearch(
+              keyword,
+              dateSearchEnabled,
+              labels
+            );
 
-            // 4. 検索開始（実行フェーズは startSearch に完全委譲）
-            await startSearch({
+            // 4.検索開始
+            await startSearch(
               folder,
               keyword,
               ignoreCase,
-              dateSearchEnabled,
               dateMask,
               labels,
               panel,
-              lastState: state.lastState,
-              cancelRequestedRef: { value: state.cancelRequested },
-              isSearchingRef: { value: state.isSearching },
-              resultsRef: state.resultsRef
-            });
+              state
+            );
 
-            // 検索完了後に全件を state.results に反映
+            // 検索完了後、結果を state に反映
             state.results = state.resultsRef.value;
+            state.lastState.results = state.resultsRef.value;
 
           } catch (err: any) {
             vscode.window.showWarningMessage(err.message);
@@ -123,7 +131,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         case "cancelSearch": {
-          state.cancelRequested = true;
+          state.cancelRequestedRef.value = true;
           state.isSearching = false;
           break;
         }

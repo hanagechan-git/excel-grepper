@@ -16,14 +16,15 @@
   },
   "include": [
     "src/extension.ts",
-    "src/extension/**/*.ts",
+    "src/extensionCore/**/*.ts",
     "src/ui/**/*.ts",
     "src/core/**/*",
+    "src/search/**/*",
     "src/validation/**/*",
     "src/common/**/*",
     "src/i18n/**/*.ts",
     "src/i18n/**/*.json",
     "src/dateCheck/**/*",
-    "src/extension/fileCollector.ts"
+    "src/extensionCore/fileCollector.ts"
   ]
 }

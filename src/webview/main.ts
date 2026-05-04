@@ -55,8 +55,8 @@ window.addEventListener("message", (event) => {
 
     case "progress":
       (document.getElementById("status-area") as HTMLElement).textContent =
-        `${message.scanned} / ${message.total} files scanned\n` +
-        `Current File: ${message.currentFile}`;
+        `${message.done} / ${message.total} files scanned\n` +
+        `Last completed: ${message.lastCompleted}`;
       break;
 
     case "searchError":
