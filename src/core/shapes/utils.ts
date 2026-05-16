@@ -85,16 +85,3 @@ export function parseTwoCellAnchors(drawingXml: string): string[] {
 
 }
 
-
-/**
- * キーワード一致判定。
- * ignoreCase が true の場合は大文字小文字を無視して比較する。
- */
-export function matchKeyword(text: string, keyword: string, ignoreCase: boolean): boolean {
-
-  if (ignoreCase) {
-    return text.toUpperCase().includes(keyword.toUpperCase());
-  }
-  return text.includes(keyword);
-
-}

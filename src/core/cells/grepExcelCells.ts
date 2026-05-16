@@ -1,9 +1,10 @@
-// src\core\cells\grepExcelCells.ts
+// src/core/cells/grepExcelCells.ts
 import JSZip from "jszip";
 import { grepSharedStrings } from "./grepSharedStrings";
 import { findCells } from "./findCells";
 import { DateMask } from "../../common/dateTypes";
 import { findDateCells } from "../date/findDateCells";
+import { SearchConfig } from "../../common/types";
 
 export interface CellGrepResult {
   fileName: string;   // 後で複数ファイル対応するときに使う
@@ -15,22 +16,21 @@ export interface CellGrepResult {
 /**
  * Excel のセルを検索する統合関数。
  * sharedStrings → sheet.xml の順に解析して、
- * キーワードに一致するセルだけを返す。
+ * 検索条件に一致するセルだけを返す。
  */
 export async function grepExcelCells(
   fileName: string,
   zip: JSZip,
   sheetMap: Record<number, string>,
-  keyword: string,
-  ignoreCase: boolean,
+  config: SearchConfig,          // ← keyword / ignoreCase / isRegex
   dateMask: DateMask | null,
   limitedSheetName?: string,
 ): Promise<CellGrepResult[]> {
 
   const results: CellGrepResult[] = [];
 
-  // sharedStrings.xml を検索して辞書を作る
-  const sharedStrings = await grepSharedStrings(zip, keyword, ignoreCase);
+  // SearchConfig を使って sharedStrings.xml を検索して辞書を作る
+  const sharedStrings = await grepSharedStrings(zip, config);
 
   // 全シートを走査
   for (const sheetNumberStr of Object.keys(sheetMap)) {
@@ -38,18 +38,19 @@ export async function grepExcelCells(
     const sheetNumber = parseInt(sheetNumberStr);
     const sheetName = sheetMap[sheetNumber];
 
-    // シート名フィルタ（指定されている場合）
+    // シート名フィルタ
     if (limitedSheetName && sheetName !== limitedSheetName) {
       continue;
     }
 
-    // sheet.xml を解析してセルを検索
+    // 日付検索か文字列検索かを分岐
     if (dateMask === null) {
-      // 文字列検索
-      const found = await findCells(zip, sheetNumber, sharedStrings, keyword, ignoreCase);
+      // 文字列検索（正規表現含む）
+      const found = await findCells(zip, sheetNumber, sharedStrings, config);
+
       results.push(...found.map(f => ({
         fileName,
-        sheetName: sheetMap[sheetNumber],
+        sheetName,
         cellAddress: f.cellAddress,
         matchTxt: f.matchTxt
       })));
@@ -57,9 +58,10 @@ export async function grepExcelCells(
     } else {
       // 日付検索
       const found = await findDateCells(zip, sheetNumber, dateMask);
+
       results.push(...found.map(f => ({
         fileName,
-        sheetName: sheetMap[sheetNumber],
+        sheetName,
         cellAddress: f.cellAddress,
         matchTxt: f.matchTxt
       })));

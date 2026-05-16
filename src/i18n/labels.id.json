@@ -5,6 +5,7 @@
     "keyword": "Kata kunci",
     "ignoreCase": "Abaikan huruf besar/kecil",
     "dateSearch": "Cari sel tanggal (YYYYMMDD dengan * wildcard)",
+    "regex": "Regex",
     "search": "Cari",
     "cancel": "Batal",
     "csv": "Ekspor CSV"

@@ -67,6 +67,10 @@ export function getWebviewContent(
               <input id="dateSearchInput" type="checkbox">
               ${labels.search.dateSearch}
             </label>
+            <label style="margin-left: 20px;">
+              <input id="regexInput" type="checkbox">
+              ${labels.search.regex}
+            </label>
           </div>
 
           <div class="button-row">

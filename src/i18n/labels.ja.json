@@ -5,6 +5,7 @@
     "keyword": "キーワード",
     "ignoreCase": "大文字小文字を無視",
     "dateSearch": "日付型セル検索 (YYYYMMDD with * wildcard)",
+    "regex": "正規表現",
     "search": "検索",
     "cancel": "キャンセル",
     "csv": "CSV 出力"

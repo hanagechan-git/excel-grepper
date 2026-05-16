@@ -5,6 +5,7 @@
     "keyword": "Keyword",
     "ignoreCase": "Case-insensitive",
     "dateSearch": "Date cell search (YYYYMMDD with * wildcard)",
+    "regex": "Regex",
     "search": "Search",
     "cancel": "Cancel",
     "csv": "Export CSV"

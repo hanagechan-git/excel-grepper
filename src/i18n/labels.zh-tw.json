@@ -5,6 +5,7 @@
     "keyword": "關鍵字",
     "ignoreCase": "忽略大小寫",
     "dateSearch": "日期搜尋 (YYYYMMDD，支援 * wildcard)",
+    "regex": "正則",
     "search": "搜尋",
     "cancel": "取消",
     "csv": "匯出 CSV"

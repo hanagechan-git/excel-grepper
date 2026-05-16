@@ -1,8 +1,10 @@
 // src/search/startSearch.ts
 
 import * as vscode from "vscode";
-import { runParallel } from "../core/parallel/workerPool";
+import * as fs from "fs";
+import * as path from "path";
 
+import { runParallel } from "../core/parallel/workerPool";
 import { processOneFile } from "./processOneFile";
 import { formatResults } from "./formatResults";
 import { buildUnreadableMessage } from "./buildUnreadableMessage";
@@ -10,15 +12,19 @@ import { updateProgress } from "./updateProgress";
 
 import { sanitizeKeyword } from "../extensionCore/sanitize";
 import { DateMask } from "../common/dateTypes";
-import { ExcelGrepResult } from "../common/types";
+import { ExcelGrepResult, SearchConfig } from "../common/types";
 import { collectExcelFiles } from "../extensionCore/fileCollector";
 
 import type { ExtensionState } from "../extensionCore/state";
+
+// ★ 巨大 Excel スキップ閾値（78MB）
+const LARGE_FILE_THRESHOLD_MB = 78;
 
 export async function startSearch(
   folder: string,
   keyword: string,
   ignoreCase: boolean,
+  isRegex: boolean,
   dateMask: DateMask | null,
   labels: any,
   panel: vscode.WebviewPanel,
@@ -26,6 +32,13 @@ export async function startSearch(
 ) {
   // --- 1. 検索準備 ---
   const safeKeyword = sanitizeKeyword(keyword);
+
+  // SearchConfig を作成
+  const config: SearchConfig = {
+    keyword: safeKeyword,
+    ignoreCase,
+    isRegex
+  };
 
   // 参照型の共有状態
   const resultsRef = state.resultsRef;
@@ -41,15 +54,24 @@ export async function startSearch(
   // --- 2. ファイル一覧取得 ---
   const files = await collectExcelFiles(folder);
 
+  // --- 2.5 巨大ファイルスキップ処理 ---
+  const filteredFiles = files.filter(file => {
+    const sizeMB = fs.statSync(file).size / (1024 * 1024);
+    if (sizeMB >= LARGE_FILE_THRESHOLD_MB) {
+      unreadableFiles.push(path.relative(folder, file).replace(/\//g, "\\"));
+      return false;
+    }
+    return true;
+  });
+
   // --- 3. 並列処理 ---
   await runParallel(
-    files,
+    filteredFiles,
     async (file, index) => {
       await processOneFile(
         file,
         folder,
-        safeKeyword,
-        ignoreCase,
+        config,                 // ← ★ keyword / ignoreCase の代わりに config を渡す
         dateMask,
         unreadableFiles,
         resultsRef,

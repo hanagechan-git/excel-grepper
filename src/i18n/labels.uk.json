@@ -5,6 +5,7 @@
     "keyword": "Ключове слово",
     "ignoreCase": "Ігнорувати регістр",
     "dateSearch": "Пошук за датою (YYYYMMDD з * wildcard)",
+    "regex": "Regex",
     "search": "Пошук",
     "cancel": "Скасувати",
     "csv": "Експорт CSV"

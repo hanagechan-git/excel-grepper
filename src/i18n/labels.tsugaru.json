@@ -5,6 +5,7 @@
     "keyword": "キーワード",
     "ignoreCase": "大文字小文字、どっちでもいんだべさ",
     "dateSearch": "日付さほじぐどき (YYYYMMDD と * つかうはんで)",
+    "regex": "正規表現",
     "search": "検索",
     "cancel": "キャンセル",
     "csv": "CSV 出力"

@@ -9,7 +9,7 @@ import { parseWorkbook } from "../core/workbook/parseWorkbook";
 import { grepExcelFile } from "../core/grepExcelFile";
 
 import { DateMask } from "../common/dateTypes";
-import { ExcelGrepResult } from "../common/types";
+import { ExcelGrepResult, SearchConfig } from "../common/types";
 
 /**
  * 1つの Excel ファイルを処理する関数。
@@ -25,8 +25,7 @@ import { ExcelGrepResult } from "../common/types";
 export async function processOneFile(
   file: string,
   folder: string,
-  safeKeyword: string,
-  ignoreCase: boolean,
+  config: SearchConfig,
   dateMask: DateMask | null,
   unreadableFiles: string[],
   resultsRef: { value: ExcelGrepResult[] },
@@ -59,8 +58,7 @@ export async function processOneFile(
       file,
       zip,
       sheetMap,
-      safeKeyword,
-      ignoreCase,
+      config,
       dateMask
     );
 

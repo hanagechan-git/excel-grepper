@@ -5,6 +5,7 @@
     "keyword": "Từ khóa",
     "ignoreCase": "Bỏ qua chữ hoa/thường",
     "dateSearch": "Tìm ô kiểu ngày (YYYYMMDD với * wildcard)",
+    "regex": "Regex",
     "search": "Tìm kiếm",
     "cancel": "Hủy",
     "csv": "Xuất CSV"

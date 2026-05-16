@@ -3,7 +3,7 @@
 import JSZip from "jszip";
 import { grepExcelCells ,CellGrepResult } from "./cells/grepExcelCells";
 import { grepExcelShapes, ShapeGrepResult } from "./shapes/grepExcelShapes";
-import { ExcelGrepResult } from "../common/types";
+import { ExcelGrepResult, SearchConfig } from "../common/types";
 import { DateMask } from "../common/dateTypes";
 
 /**
@@ -15,9 +15,8 @@ import { DateMask } from "../common/dateTypes";
 export async function grepExcelFile(
   fileName: string,
   zip: JSZip,
-  sheetMap: Record<number, string>,   // Cells 用の既存構造
-  keyword: string,
-  ignoreCase: boolean,
+  sheetMap: Record<number, string>,
+  config: SearchConfig,          // ← keyword / ignoreCase / isRegex
   dateMask: DateMask | null
 ): Promise<ExcelGrepResult[]> {
 
@@ -28,8 +27,7 @@ export async function grepExcelFile(
     fileName,
     zip,
     sheetMap,
-    keyword,
-    ignoreCase,
+    config,
     dateMask
   );
   const cellResults: ExcelGrepResult[] = cellResultsRaw.map(convertCellResult);
@@ -41,18 +39,15 @@ export async function grepExcelFile(
     fileName,
     zip,
     sheetMap,
-    keyword,
-    ignoreCase
+    config
   );
   const shapeResults: ExcelGrepResult[] = shapeResultsRaw.map(convertShapeResult);
 
   // -----------------------------
   // 3. 結果を統合して返す
   // -----------------------------
-
   return [...cellResults, ...shapeResults];
 }
-
 
 function convertCellResult(r: CellGrepResult): ExcelGrepResult {
   return {

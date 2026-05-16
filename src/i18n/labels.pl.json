@@ -5,6 +5,7 @@
     "keyword": "Słowo kluczowe",
     "ignoreCase": "Ignoruj wielkość liter",
     "dateSearch": "Wyszukiwanie daty (YYYYMMDD z * wildcard)",
+    "regex": "Regex",
     "search": "Szukaj",
     "cancel": "Anuluj",
     "csv": "Eksport CSV"

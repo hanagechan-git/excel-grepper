@@ -2,8 +2,12 @@
 
 All notable changes to the "excel-grepper" extension will be documented in this file.
 
-# 1.8.0
-## Performance Improvements
+# 1.9.0
+## Regex Search
+- Added support for JavaScript‑compatible regular expressions
+
+## 1.8.0
+### Performance Improvements
 - Added parallel search that processes multiple files simultaneously
 - Automatically selects the optimal number of workers based on CPU cores
 - Significant speed improvements in environments with large numbers of files  

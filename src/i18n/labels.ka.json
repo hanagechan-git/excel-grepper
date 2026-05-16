@@ -5,6 +5,7 @@
     "keyword": "საკვანძო სიტყვა",
     "ignoreCase": "რეგისტრის იგნორირება",
     "dateSearch": "თარიღის ძიება (YYYYMMDD * wildcard-ით)",
+    "regex": "Regex",
     "search": "ძიება",
     "cancel": "გაუქმება",
     "csv": "CSV ექსპორტი"

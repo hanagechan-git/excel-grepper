@@ -6,9 +6,11 @@ import {
   parseTwoCellAnchors,
   extractShapeText,
   extractShapeCellAddress,
-  extractAutoShapeType,
-  matchKeyword
+  extractAutoShapeType
 } from "./utils";
+
+import { SearchConfig } from "../../common/types";
+import { testMatch } from "../search/testMatch";
 
 /**
  * 図形検索の結果を表すデータ構造。
@@ -34,8 +36,7 @@ export async function grepExcelShapes(
   fileName: string,
   zip: JSZip,
   sheetMap: Record<number, string>,
-  keyword: string,
-  ignoreCase: boolean
+  config: SearchConfig          // ← ★ keyword / ignoreCase の代わりに SearchConfig
 ): Promise<ShapeGrepResult[]> {
 
   const results: ShapeGrepResult[] = [];
@@ -64,7 +65,8 @@ export async function grepExcelShapes(
 
       for (const anchor of anchors) {
         const matchTxt = extractShapeText(anchor);
-        if (!matchKeyword(matchTxt, keyword, ignoreCase)) {
+
+        if (!testMatch(matchTxt, config)) {
           continue;
         }
 

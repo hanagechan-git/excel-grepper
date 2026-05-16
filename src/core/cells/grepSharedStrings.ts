@@ -1,10 +1,12 @@
 // src\core\cells\grepSharedStrings.ts
 import JSZip from "jszip";
+import { SearchConfig } from "../../common/types";
+import { testMatch } from "../search/testMatch";
 
 /**
  * sharedStrings.xml の中から、検索キーワードに一致する文字列だけを取り出す関数。
  * 「sharedIndex → 実際の文字列」の辞書を返す。
- * 
+ *
  * ・<si> 単位で index を正確に取る
  * ・<rPh>（ふりがな）は除外
  * ・<r>（リッチテキスト）の <t> は全部結合
@@ -12,8 +14,7 @@ import JSZip from "jszip";
  */
 export async function grepSharedStrings(
   zip: JSZip,
-  keyword: string,
-  ignoreCase: boolean
+  config: SearchConfig
 ): Promise<Record<number, string>> {
 
   // sharedStrings.xml を取得
@@ -29,10 +30,7 @@ export async function grepSharedStrings(
 
   const result: Record<number, string> = {};
 
-  // 大文字小文字を無視する場合は keyword を大文字化しておく
-  const target = ignoreCase ? keyword.toUpperCase() : keyword;
-
-  // <si> ... </si> を全部抜き出す（sharedStrings の1要素）
+  // <si> ... </si> を全部抜き出す
   const siBlocks = xml.match(/<si>([\s\S]*?)<\/si>/g) || [];
 
   siBlocks.forEach((si, index) => {
@@ -51,11 +49,8 @@ export async function grepSharedStrings(
       text += inner;
     }
 
-    // 比較用に大文字化するかどうか
-    const haystack = ignoreCase ? text.toUpperCase() : text;
-
-    // キーワードが含まれていれば辞書に登録
-    if (haystack.includes(target)) {
+    // SearchConfig を使って testMatch
+    if (testMatch(text, config)) {
       result[index] = text;
     }
   });

@@ -10,6 +10,7 @@ export interface SearchState {
   keyword: string | null;
   ignoreCase: boolean;
   dateSearchEnabled: boolean;
+  isRegex: boolean;
   results: ExcelGrepResult[] | null;
   fileCount: number;
   unreadableMessage: string | null;
@@ -52,6 +53,7 @@ export function createInitialState(): ExtensionState {
       keyword: null,
       ignoreCase: false,
       dateSearchEnabled: false,
+      isRegex: false,
       results: null,
       fileCount: 0,
       unreadableMessage: null,
@@ -69,5 +71,13 @@ export function createInitialState(): ExtensionState {
     fileCount: 0,
     truncated: false,
     unreadableMessage: ""
+  };
+}
+
+export function updateSearchConditions(extState: ExtensionState, partial: Partial<SearchState>) {
+  // lastState の UI 部分だけ更新する
+  extState.lastState = {
+    ...extState.lastState,
+    ...partial
   };
 }

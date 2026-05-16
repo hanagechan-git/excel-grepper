@@ -7,6 +7,7 @@ export interface Labels {
     keyword: string;
     ignoreCase: string;
     dateSearch: string;
+    regex: string;
     search: string;
     cancel: string;
     csv: string;

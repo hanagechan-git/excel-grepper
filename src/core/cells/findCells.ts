@@ -1,5 +1,7 @@
 // src\core\cells\findCells.ts
 import JSZip from "jszip";
+import { SearchConfig } from "../../common/types";
+import { testMatch } from "../search/testMatch";
 
 export interface FoundCell {
   cellAddress: string; // 例: "A1"
@@ -8,14 +10,13 @@ export interface FoundCell {
 
 /**
   * sheet.xml を解析して、セルの値を sharedStrings から逆引きする。
-  * キーワードに一致するセルだけを返す。
+  * 検索条件に一致するセルだけを返す。
   */
 export async function findCells(
   zip: JSZip,
   sheetNumber: number,
   sharedStrings: Record<number, string>,
-  keyword: string,
-  ignoreCase: boolean
+  config: SearchConfig
 ): Promise<FoundCell[]> {
 
   const sheetPath = `xl/worksheets/sheet${sheetNumber}.xml`;
@@ -31,8 +32,6 @@ export async function findCells(
   const flat = xml.replace(/[\r\n]/g, "");
 
   const results: FoundCell[] = [];
-  const target = ignoreCase ? keyword.toUpperCase() : keyword;
-
   let pos = 0;
 
   while (true) {
@@ -97,12 +96,9 @@ export async function findCells(
       }
     }
 
-// 文字列が取れたら検索（sharedStrings 方式もコードシンプルにするためにやっとく）
-    if (text) {
-      const haystack = ignoreCase ? text.toUpperCase() : text;
-      if (haystack.includes(target)) {
-        results.push({ cellAddress, matchTxt: text });
-      }
+    // 文字列が取れたら検索（sharedStrings 方式もコードシンプルにするためにやっとく）
+    if (text && testMatch(text, config)) {
+      results.push({ cellAddress, matchTxt: text });
     }
 
     // 次のセルを探すために位置を進める

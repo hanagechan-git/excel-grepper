@@ -28,6 +28,7 @@ export type ToWebviewMessage =
       fileCount: number;
       keyword: string;
       unreadableMessage: string;
+      isRegex: boolean;
       truncated: boolean;
       truncatedNotice: string;
     }
@@ -45,6 +46,7 @@ export type ToWebviewMessage =
         results: ExcelGrepResult[] | null;
         fileCount: number;
         unreadableMessage: string | null;
+        isRegex: boolean;
         truncated: boolean;
         truncatedNotice: string | null;
       };
@@ -62,6 +64,7 @@ export type FromWebviewMessage =
         keyword: string;
         ignoreCase: boolean;
         dateSearchEnabled: boolean;
+        isRegex: boolean;
       };
     }
   | {
@@ -82,4 +85,14 @@ export type FromWebviewMessage =
     }
   | {
       type: "restoreState";
+    }
+  | {
+      type: "updateSearchConditions";
+      payload: {
+        folder: string;
+        keyword: string;
+        ignoreCase: boolean;
+        dateSearchEnabled: boolean;
+        isRegex: boolean;
+      };
     };

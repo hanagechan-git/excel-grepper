@@ -5,6 +5,7 @@
     "keyword": "关键词",
     "ignoreCase": "忽略大小写",
     "dateSearch": "日期搜索 (YYYYMMDD，支持 * wildcard)",
+    "regex": "正则",
     "search": "搜索",
     "cancel": "取消",
     "csv": "导出 CSV"

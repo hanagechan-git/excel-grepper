@@ -5,6 +5,8 @@ import type { ExcelGrepResult } from "../common/types";
 import { renderResultTable } from "./components/resultTable";
 
 let isSearching = false;
+let debounceTimer: number | undefined = undefined;
+let isRestoring = false; // ★ restoreState 中は post を抑制
 
 // WebView の window に labels を追加する
 declare global {
@@ -25,19 +27,6 @@ window.addEventListener("load", () => {
   vscode.postMessage({ type: "restoreState" });
 });
 
-
-// 初期化時に復元
-const state = vscode.getState();
-if (state) {
-  (document.getElementById("folderInput") as HTMLInputElement).value = state.folder ?? "";
-  (document.getElementById("keywordInput") as HTMLInputElement).value = state.keyword ?? "";
-  (document.getElementById("ignoreCaseInput") as HTMLInputElement).checked = state.ignoreCase ?? false;
-
-  if (state.results) {
-    renderGrepResult(state.results, state.fileCount, state.keyword, state.unreadableMessage, state.truncated, state.truncatedNotice);
-  }
-}
-
 // -----------------------------
 // 拡張機能 → Webview のメッセージ受信
 // -----------------------------
@@ -47,10 +36,6 @@ window.addEventListener("message", (event) => {
   switch (message.type) {
     case "initLabels":
       window.labels = message.labels;
-      const state = vscode.getState();
-      if (state?.results) {
-        renderGrepResult(state.results, state.fileCount, state.keyword, state.unreadableMessage, state.truncated, state.truncatedNotice);
-      }
       break;
 
     case "progress":
@@ -75,7 +60,7 @@ window.addEventListener("message", (event) => {
       // 検索完了
       isSearching = false;
       setSearching(false);
-      renderGrepResult(message.payload, message.fileCount, message.keyword, message.unreadableMessage, message.truncated, message.truncatedNotice);
+      renderGrepResult(message.payload, message.fileCount, message.keyword, message.unreadableMessage, message.isRegex, message.truncated, message.truncatedNotice);
       break;
 
     case "folderSelected":
@@ -83,11 +68,14 @@ window.addEventListener("message", (event) => {
       break;
 
     case "restoreState":
+      isRestoring = true;
+
       const s = message.state;
       (document.getElementById("folderInput") as HTMLInputElement).value = s.folder ?? "";
       (document.getElementById("keywordInput") as HTMLInputElement).value = s.keyword ?? "";
       (document.getElementById("ignoreCaseInput") as HTMLInputElement).checked = s.ignoreCase ?? false;
       (document.getElementById("dateSearchInput") as HTMLInputElement).checked = s.dateSearchEnabled ?? false;
+      (document.getElementById("regexInput") as HTMLInputElement).checked = s.isRegex ?? false;
 
       if (message.isSearching) {
         isSearching = true;
@@ -98,8 +86,9 @@ window.addEventListener("message", (event) => {
       }
 
       if (s.results) {
-        renderGrepResult(s.results, s.fileCount, s.keyword ?? "", s.unreadableMessage ?? "", s.truncated, s.truncatedNotice ?? "");
+        renderGrepResult(s.results, s.fileCount, s.keyword ?? "", s.unreadableMessage ?? "", s.isRegex, s.truncated, s.truncatedNotice ?? "");
       }
+      isRestoring = false;
       break;
 
   }
@@ -114,6 +103,14 @@ function setupSearchFormEvents() {
   const keywordInput = document.getElementById("keywordInput") as HTMLInputElement;
   const ignoreCaseInput = document.getElementById("ignoreCaseInput") as HTMLInputElement;
   const dateSearchInput = document.getElementById("dateSearchInput") as HTMLInputElement;
+  const regexInput = document.getElementById("regexInput") as HTMLInputElement;
+
+  // 入力イベントも保存
+  folderInput.addEventListener("blur", postConditionsDebounced);
+  keywordInput.addEventListener("blur", postConditionsDebounced);
+  ignoreCaseInput.addEventListener("change", postConditionsDebounced);
+  dateSearchInput.addEventListener("change", postConditionsDebounced);
+  regexInput.addEventListener("change", postConditionsDebounced);
 
   // ファイル選択ダイアログ
   document.getElementById("fileDialogBtn")!.addEventListener("click", () => {
@@ -160,8 +157,7 @@ function setupSearchFormEvents() {
     const keyword = keywordInput.value;
     const ignoreCase = ignoreCaseInput.checked;
     const dateSearchEnabled = dateSearchInput.checked;
-
-    vscode.setState({ folder, keyword, ignoreCase, dateSearchEnabled });
+    const isRegex = regexInput.checked;
 
     vscode.postMessage({
       type: "search",
@@ -169,12 +165,40 @@ function setupSearchFormEvents() {
         folder,
         keyword,
         ignoreCase,
-        dateSearchEnabled
+        dateSearchEnabled,
+        isRegex
       }
     });
   }
 
 }
+
+function postConditionsDebounced() {
+  if (isRestoring) {
+    return; // ★ restoreState 中は絶対に送らない
+  }
+
+  clearTimeout(debounceTimer);
+
+  debounceTimer = window.setTimeout(() => {
+    vscode.postMessage({
+      type: "updateSearchConditions",
+      payload: collectCurrentConditions()
+    });
+  }, 500); // ★ 500ms デバウンス
+}
+
+function collectCurrentConditions() {
+  return {
+    folder: (document.getElementById("folderInput") as HTMLInputElement).value,
+    keyword: (document.getElementById("keywordInput") as HTMLInputElement).value,
+    ignoreCase: (document.getElementById("ignoreCaseInput") as HTMLInputElement).checked,
+    dateSearchEnabled: (document.getElementById("dateSearchInput") as HTMLInputElement).checked,
+    isRegex: (document.getElementById("regexInput") as HTMLInputElement).checked
+  };
+}
+
+
 // -----------------------------
 // grep 結果の描画
 // -----------------------------
@@ -183,6 +207,7 @@ function renderGrepResult(
   fileCount: number,
   keyword: string,
   unreadableMessage: string,
+  isRegex: boolean,
   truncated:boolean,
   truncatedNotice: string) {
 
@@ -192,14 +217,6 @@ function renderGrepResult(
   }
 
   const resultArea = document.getElementById("result-area")!;
-
-  vscode.setState({
-    ...vscode.getState(),
-    results,
-    fileCount,
-    truncated,
-    truncatedNotice
-  });
 
   resultArea.innerHTML = "";
 
@@ -251,6 +268,7 @@ function setSearching(isSearching: boolean) {
   const keywordInput = document.getElementById("keywordInput") as HTMLInputElement;
   const ignoreCaseInput = document.getElementById("ignoreCaseInput") as HTMLInputElement;
   const dateSearchInput = document.getElementById("dateSearchInput") as HTMLInputElement;
+  const regexInput = document.getElementById("regexInput") as HTMLInputElement;
   const fileDialogBtn = document.getElementById("fileDialogBtn") as HTMLButtonElement;
   const csvBtn = document.getElementById("csvBtn") as HTMLButtonElement;
 
@@ -261,6 +279,7 @@ function setSearching(isSearching: boolean) {
   keywordInput.disabled = isSearching;
   ignoreCaseInput.disabled = isSearching;
   dateSearchInput.disabled = isSearching;
+  regexInput.disabled = isSearching;
   fileDialogBtn.disabled = isSearching;
   csvBtn.disabled = isSearching;
 

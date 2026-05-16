@@ -7,6 +7,7 @@ Search inside Excel files (.xlsx / .xlsm) directly from VS Code.
 ## ✨ Features
 ![Excel Grepper Demo](https://raw.githubusercontent.com/hanagechan-git/excel-grepper/main/images/demo.gif)
 * 🔍 Search text inside Excel files (cells & shapes)
+* 🧩 Regex search (JavaScript RegExp) 
 * 📁 Recursive search in folders
 * 🔡 Case-insensitive search option
 * 📅 Date cell search (Excel‑compatible date matching)
@@ -33,6 +34,21 @@ Excel Grepper: Run
    * (Optional) Enable Date search
 
 3. Click **Search**
+
+---
+
+## 🧩 Regex Search
+Excel Grepper supports JavaScript‑compatible regular expressions, with full Unicode handling for Japanese text, symbols, and emoji.
+
+Examples:
+   * \d+ — matches numbers
+   * ^TODO — lines starting with “TODO”
+   * (成功|失敗|エラー) — matches any of the listed words
+   * [ぁ-ん]+ — hiragana only
+   * [A-Z]+[0-9]+ — Excel‑style cell references
+
+Regex search applies to both cells and shapes (AutoShapes).
+If an invalid pattern is entered, an error message will be shown.
 
 ---
 

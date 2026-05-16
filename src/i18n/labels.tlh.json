@@ -5,6 +5,7 @@
     "keyword": "mu' wej",
     "ignoreCase": "pIqaD tInHom tInqu' buSHa'",
     "dateSearch": "poH nej (YYYYMMDD * chaw')",
+    "regex": "Regex",
     "search": "nej",
     "cancel": "qIl",
     "csv": "CSV ngeH"

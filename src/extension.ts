@@ -15,7 +15,8 @@ import {
 
 import {
   createInitialState,
-  ExtensionState
+  ExtensionState,
+  updateSearchConditions
 } from "./extensionCore/state";
 
 import { validateKeyword } from "./validation/validateKeyword";
@@ -58,7 +59,7 @@ export function activate(context: vscode.ExtensionContext) {
     );
 
     // Webview が閉じられたら state を初期化
-    panel.onDidDispose(() => {
+    panel.onDidDispose(async () => {
       panel = undefined;
 
       // state 初期化
@@ -86,13 +87,27 @@ export function activate(context: vscode.ExtensionContext) {
       }
 
       switch (msg.type) {
+
+        case "updateSearchConditions": {
+          updateSearchConditions(state, msg.payload);
+          break;
+        }
+
         case "restoreState": {
           postRestoreState(panel, state.lastState, state.isSearching);
           break;
         }
 
         case "search": {
-          const { folder, keyword, ignoreCase, dateSearchEnabled } = msg.payload;
+          const { folder, keyword, ignoreCase, dateSearchEnabled, isRegex } = msg.payload;
+
+          // 検索条件を state に保存
+          state.lastState.folder = folder;
+          state.lastState.keyword = keyword;
+          state.lastState.ignoreCase = ignoreCase;
+          state.lastState.dateSearchEnabled = dateSearchEnabled;
+          state.lastState.isRegex = isRegex;
+          state.isSearching = true;
 
           // バリデーションまとめて実行
           try {
@@ -112,6 +127,7 @@ export function activate(context: vscode.ExtensionContext) {
               folder,
               keyword,
               ignoreCase,
+              isRegex,
               dateMask,
               labels,
               panel,
@@ -176,7 +192,13 @@ export function activate(context: vscode.ExtensionContext) {
           });
 
           if (folder && folder.length > 0) {
-            postFolderSelected(panel, folder[0].fsPath);
+            const fsPath = folder[0].fsPath;
+
+            // state を更新
+            state.lastState.folder = fsPath;
+
+            // Webview に「このフォルダ使ってね」と通知
+            postFolderSelected(panel, fsPath);
           }
           break;
         }
