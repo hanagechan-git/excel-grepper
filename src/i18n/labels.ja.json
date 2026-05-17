@@ -13,7 +13,11 @@
   "result": {
     "noResult": "一致する結果はありませんでした。",
     "truncatedNotice": "⚠️ 2000件を超えたため、表示を一部省略しました。CSV出力して確認してください。",
-    "unreadableFilesHeader": "⚠️ 内部構造が異常に大きい 以下のExcelは、検索から除外しました。：",
+    "unreadableFilesHeader": "⚠️ 以下の Excel は読み取れなかったため、検索から除外しました。：",
+    "reasonTooLarge": "📦サイズ超過",
+    "reasonInnerLarge": "😭シートの中身デカすぎ",
+    "reasonEncrypted": "🔒パスワード保護",
+    "reasonCorrupted": "🛠️破損ファイル",
     "files": "件のファイル",
     "hits": "件ヒット",
     "target": "対象",

@@ -13,7 +13,11 @@
   "result": {
     "noResult": "Không tìm thấy kết quả phù hợp.",
     "truncatedNotice": "⚠️ Hơn 2000 kết quả, một phần đã được rút gọn. Hãy xuất CSV để xem đầy đủ.",
-    "unreadableFilesHeader": "⚠️ Các tệp Excel sau quá lớn hoặc bất thường, đã bị loại khỏi tìm kiếm:",
+    "unreadableFilesHeader": "⚠️ Các tệp Excel sau không thể đọc được và đã bị loại khỏi tìm kiếm:",
+    "reasonTooLarge": "📦 Kích thước quá lớn",
+    "reasonInnerLarge": "😭 Nội dung trang tính quá lớn",
+    "reasonEncrypted": "🔒 Được bảo vệ bằng mật khẩu",
+    "reasonCorrupted": "🛠️ Tệp bị hỏng",
     "files": "tệp",
     "hits": "lần trùng khớp",
     "target": "Mục tiêu",

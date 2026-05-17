@@ -13,7 +13,11 @@
   "result": {
     "noResult": "No matching results were found.",
     "truncatedNotice": "⚠️ Results exceed 2000 items. Only the first 2000 are shown.Export as CSV to view all results.",
-    "unreadableFilesHeader": "⚠️ Some Excel files with unusually large internal structures were excluded from the search.:",
+    "unreadableFilesHeader": "⚠️ The following Excel files could not be read and were excluded from the search:",
+    "reasonTooLarge": "📦 File too large",
+    "reasonInnerLarge": "😭 Sheet content is way too large",
+    "reasonEncrypted": "🔒 Password protected",
+    "reasonCorrupted": "🛠️ Corrupted file",
     "files": "files",
     "hits": "hits",
     "target": "Target",

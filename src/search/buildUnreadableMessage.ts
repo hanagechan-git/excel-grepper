@@ -1,13 +1,13 @@
 // src/search/buildUnreadableMessage.ts
 
 /**
- * 壊れていて読み込めなかった Excel ファイル一覧のメッセージを生成する。
+ * 読み取れなかった Excel ファイル一覧のメッセージを生成する。
  * - unreadableFiles が空なら空文字を返す
  * - labels.result.unreadableFilesHeader を先頭に付ける
- * - ファイル一覧は "- path" の箇条書きで返す
+ * - 各ファイルに理由ラベルを付けて箇条書きで返す
  */
 export function buildUnreadableMessage(
-  unreadableFiles: string[],
+  unreadableFiles: { path: string; reason: string }[],
   labels: any
 ) {
   if (unreadableFiles.length === 0) {
@@ -16,8 +16,19 @@ export function buildUnreadableMessage(
 
   const header = labels.result.unreadableFilesHeader;
 
+  // 理由コード → 表示ラベル
+  const reasonLabelMap: Record<string, string> = {
+    tooLarge: labels.result.reasonTooLarge,
+    innerLarge: labels.result.reasonInnerLarge,
+    encrypted: labels.result.reasonEncrypted,
+    corrupted: labels.result.reasonCorrupted,
+  };
+
   const list = unreadableFiles
-    .map(f => `- ${f}`)
+    .map(f => {
+      const reasonLabel = reasonLabelMap[f.reason] ?? f.reason;
+      return `- ${f.path}（${reasonLabel}）`;
+    })
     .join("\n");
 
   return `${header}\n${list}`;

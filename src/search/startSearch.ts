@@ -49,7 +49,7 @@ export async function startSearch(
   cancelRequestedRef.value = false;
   state.isSearching = true;
 
-  const unreadableFiles: string[] = [];
+  const unreadableFiles: { path: string; reason: string }[] = [];
 
   // --- 2. ファイル一覧取得 ---
   const files = await collectExcelFiles(folder);
@@ -58,7 +58,10 @@ export async function startSearch(
   const filteredFiles = files.filter(file => {
     const sizeMB = fs.statSync(file).size / (1024 * 1024);
     if (sizeMB >= LARGE_FILE_THRESHOLD_MB) {
-      unreadableFiles.push(path.relative(folder, file).replace(/\//g, "\\"));
+      unreadableFiles.push({
+        path: path.relative(folder, file).replace(/\//g, "\\"),
+        reason: "tooLarge"
+      });
       return false;
     }
     return true;

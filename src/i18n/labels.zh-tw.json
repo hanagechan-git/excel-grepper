@@ -13,7 +13,11 @@
   "result": {
     "noResult": "沒有找到符合的結果。",
     "truncatedNotice": "⚠️ 結果超過 2000 筆，部分已隱藏。請匯出 CSV 以查看全部內容。",
-    "unreadableFilesHeader": "⚠️ 下列 Excel 檔案過大或異常，已從搜尋中排除：",
+    "unreadableFilesHeader": "⚠️ 以下 Excel 檔案無法讀取，已從搜尋中排除：",
+    "reasonTooLarge": "📦 檔案過大",
+    "reasonInnerLarge": "😭 工作表內容太大了",
+    "reasonEncrypted": "🔒 已受密碼保護",
+    "reasonCorrupted": "🛠️ 檔案已損毀",
     "files": "個檔案",
     "hits": "次符合",
     "target": "目標",

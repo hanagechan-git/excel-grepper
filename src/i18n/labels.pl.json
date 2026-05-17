@@ -13,7 +13,11 @@
   "result": {
     "noResult": "Brak pasujących wyników.",
     "truncatedNotice": "⚠️ Ponad 2000 wyników. Część została ukryta. Wyeksportuj CSV, aby zobaczyć całość.",
-    "unreadableFilesHeader": "⚠️ Następujące pliki Excel są zbyt duże lub uszkodzone i zostały pominięte w wyszukiwaniu:",
+    "unreadableFilesHeader": "⚠️ Następujących plików Excel nie można było odczytać i zostały pominięte w wyszukiwaniu:",
+    "reasonTooLarge": "📦 Zbyt duży rozmiar",
+    "reasonInnerLarge": "😭 Zawartość arkusza jest za duża",
+    "reasonEncrypted": "🔒 Zabezpieczony hasłem",
+    "reasonCorrupted": "🛠️ Uszkodzony plik",
     "files": "plików",
     "hits": "trafień",
     "target": "Cel",

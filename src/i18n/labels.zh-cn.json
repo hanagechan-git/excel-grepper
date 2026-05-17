@@ -13,7 +13,11 @@
   "result": {
     "noResult": "未找到匹配结果。",
     "truncatedNotice": "⚠️ 结果超过 2000 条，部分已隐藏。请导出 CSV 查看全部内容。",
-    "unreadableFilesHeader": "⚠️ 以下 Excel 文件过大或异常，已从搜索中排除：",
+    "unreadableFilesHeader": "⚠️ 以下 Excel 文件无法读取，已从搜索中排除：",
+    "reasonTooLarge": "📦 文件过大",
+    "reasonInnerLarge": "😭 工作表内容太大了",
+    "reasonEncrypted": "🔒 已加密",
+    "reasonCorrupted": "🛠️ 文件损坏",
     "files": "个文件",
     "hits": "次匹配",
     "target": "目标",

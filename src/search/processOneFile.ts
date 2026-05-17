@@ -27,7 +27,7 @@ export async function processOneFile(
   folder: string,
   config: SearchConfig,
   dateMask: DateMask | null,
-  unreadableFiles: string[],
+  unreadableFiles: { path: string; reason: string }[],
   resultsRef: { value: ExcelGrepResult[] },
   cancelRequestedRef: { value: boolean }
 ) {
@@ -36,15 +36,58 @@ export async function processOneFile(
     return;
   }
 
+  const relativePath = path.relative(folder, file).replace(/\//g, "\\");
+
   try {
     // VSCode API でファイル読み込み
     const uri = vscode.Uri.file(file);
     const fileData = await vscode.workspace.fs.readFile(uri);
 
-    // ZIP 展開（Excel は ZIP 形式）
-    const zip = await JSZip.loadAsync(fileData);
+    // --- ZIP 展開（PW 付きはここで落ちる） ---
+    let zip;
+    try {
+      zip = await JSZip.loadAsync(fileData);
+    } catch (e) {
+      // ここに来るのはほぼ PW 付き Excel
+      unreadableFiles.push({
+        path: relativePath,
+        reason: "encrypted"
+      });
+      return;
+    }
 
-    // workbook の構造を読む（シート一覧など）
+    // --- 暗号化（パスワード保護）Excel 判定（念のため） ---
+    const isEncrypted =
+      !zip.file("xl/workbook.xml") &&
+      !zip.file("xl/sharedStrings.xml") &&
+      !zip.file("xl/worksheets/sheet1.xml");
+
+    if (isEncrypted) {
+      unreadableFiles.push({
+        path: relativePath,
+        reason: "encrypted"
+      });
+      return;
+    }
+
+    // --- 内部 XML サイズチェック（innerLarge） ---
+    const sheet1 = zip.file("xl/worksheets/sheet1.xml");
+    const shared = zip.file("xl/sharedStrings.xml");
+
+    const sheet1Size = sheet1 ? (sheet1 as any)._data?.uncompressedSize ?? 0 : 0;
+    const sharedSize = shared ? (shared as any)._data?.uncompressedSize ?? 0 : 0;
+
+    const XML_LIMIT = 80 * 1024 * 1024; // 50MB
+
+    if (sheet1Size > XML_LIMIT || sharedSize > XML_LIMIT) {
+      unreadableFiles.push({
+        path: relativePath,
+        reason: "innerLarge"
+      });
+      return;
+    }
+
+    // --- workbook の構造を読む（シート一覧など） ---
     const relsMap = await parseWorkbookRels(zip);
     const sheetMap = await parseWorkbook(zip, relsMap);
 
@@ -53,7 +96,7 @@ export async function processOneFile(
       return;
     }
 
-    // grep 実行（セル + 図形）
+    // --- grep 実行（セル + 図形） ---
     const fileResults = await grepExcelFile(
       file,
       zip,
@@ -65,8 +108,11 @@ export async function processOneFile(
     // 結果を push（複数ワーカーから同時に来る可能性あり）
     resultsRef.value.push(...fileResults);
 
-  } catch {
+  } catch (e) {
     // 壊れたファイルは unreadableFiles に追加
-    unreadableFiles.push(path.relative(folder, file).replace(/\//g, "\\"));
+    unreadableFiles.push({
+      path: relativePath,
+      reason: "corrupted"
+    });
   }
 }

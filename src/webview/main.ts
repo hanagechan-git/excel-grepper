@@ -80,14 +80,20 @@ window.addEventListener("message", (event) => {
       if (message.isSearching) {
         isSearching = true;
         setSearching(true);
+
+        // 🔥 検索中 → 結果は復元しない
+        document.getElementById("status-area")!.textContent = "Searching...";
+        document.getElementById("result-area")!.innerHTML = "";
+
       } else {
         isSearching = false;
         setSearching(false);
+
+        if (s.results) {
+          renderGrepResult(s.results, s.fileCount, s.keyword ?? "", s.unreadableMessage ?? "", s.isRegex, s.truncated, s.truncatedNotice ?? "");
+        }
       }
 
-      if (s.results) {
-        renderGrepResult(s.results, s.fileCount, s.keyword ?? "", s.unreadableMessage ?? "", s.isRegex, s.truncated, s.truncatedNotice ?? "");
-      }
       isRestoring = false;
       break;
 
@@ -149,6 +155,10 @@ function setupSearchFormEvents() {
     if (isSearching) {
       return;
     }
+
+    // 🔥 検索開始が確定したのでここでクリア
+    document.getElementById("status-area")!.textContent = "";
+    document.getElementById("result-area")!.innerHTML = "";
 
     isSearching = true;
     setSearching(true);

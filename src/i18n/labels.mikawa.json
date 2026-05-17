@@ -13,7 +13,11 @@
   "result": {
     "noResult": "なんも見つからんかったじゃん。",
     "truncatedNotice": "⚠️ 2000件より多いで、ちぃと隠しとるだら。全部見るなら CSV 出すとええりん。",
-    "unreadableFilesHeader": "⚠️ この Excel、でかすぎるか壊れとるで、調べられんかったじゃん：",
+    "unreadableFilesHeader": "⚠️ この Excel、読めんかったで検索から外しといたじゃん：",
+    "reasonTooLarge": "📦 でかすぎるだら",
+    "reasonInnerLarge": "😭 シートの中身、でらデカいじゃん",
+    "reasonEncrypted": "🔒 パスワードかかっとるりん",
+    "reasonCorrupted": "🛠️ 壊れとるじゃん",
     "files": "ファイルじゃん",
     "hits": "件だら",
     "target": "ターゲットじゃん",

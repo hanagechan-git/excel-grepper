@@ -13,7 +13,11 @@
   "result": {
     "noResult": "Tidak ada hasil yang cocok.",
     "truncatedNotice": "⚠️ Lebih dari 2000 hasil, sebagian ditampilkan secara ringkas. Silakan ekspor CSV untuk melihat lengkap.",
-    "unreadableFilesHeader": "⚠️ File Excel berikut terlalu besar atau tidak normal, sehingga dikecualikan dari pencarian:",
+    "unreadableFilesHeader": "⚠️ File Excel berikut tidak dapat dibaca dan dikecualikan dari pencarian:",
+    "reasonTooLarge": "📦 Ukuran terlalu besar",
+    "reasonInnerLarge": "😭 Isi sheet terlalu besar",
+    "reasonEncrypted": "🔒 Dilindungi kata sandi",
+    "reasonCorrupted": "🛠️ File rusak",
     "files": "file",
     "hits": "temuan",
     "target": "Target",

@@ -17,6 +17,10 @@ export interface Labels {
     noResult: string;
     truncatedNotice: string;
     unreadableFilesHeader: string;
+    reasonTooLarge: string;
+    reasonInnerLarge: string;
+    reasonEncrypted: string;
+    reasonCorrupted: string;
     files: string;
     hits: string;
     target: string;

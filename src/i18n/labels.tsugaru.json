@@ -13,7 +13,11 @@
   "result": {
     "noResult": "なんもねはんで。",
     "truncatedNotice": "⚠️ 2000件さ超えで、ちっと隠しとったはんでよ。全部見だきゃ CSV 出せばいんでねが。",
-    "unreadableFilesHeader": "⚠️ この Excel、でっけぐてわやで、読めねはんで：",
+    "unreadableFilesHeader": "⚠️ この Excel、読まれねはんで、探すどがら外しといだじゃ：",
+    "reasonTooLarge": "📦 でっけぐて無理だじゃ",
+    "reasonInnerLarge": "😭 シートの中身、ばっけでけぇじゃ",
+    "reasonEncrypted": "🔒 鍵かがって開がらねじゃ",
+    "reasonCorrupted": "🛠️ 壊れでらじゃ",
     "files": "ファイルだべさ",
     "hits": "なんぼかあったど",
     "target": "どごさ向いでらやづだべ",
