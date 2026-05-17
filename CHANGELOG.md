@@ -2,8 +2,18 @@
 
 All notable changes to the "excel-grepper" extension will be documented in this file.
 
-# 1.9.0
-## Regex Search
+# 2.0.0
+## Password‑protected & oversized file handling
+- Added automatic skip for password‑protected Excel files
+- Added automatic skip for Excel files containing abnormally large internal XML structures  
+(prevents freezes and significantly improves search speed)
+
+## Performance Improvements
+- Reduced unnecessary try/catch overhead
+- Improved overall stability and responsiveness when scanning large workspaces
+
+## 1.9.0
+### Regex Search
 - Added support for JavaScript‑compatible regular expressions
 
 ## 1.8.0
